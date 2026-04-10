@@ -1,0 +1,46 @@
+.subcat-stroke-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 6px 2px;
+}
+
+/* Stroke pill */
+.subcat-stroke-pill {
+  background: #ffffff;              /* PLAIN WHITE */
+  border: 1.5px solid #fcb800;       /* YELLOW STROKE */
+  color: #000000;
+  padding: 6px 14px;                 /* SMALL SIZE */
+  border-radius: 999px;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Active / selected */
+.subcat-stroke-pill.active {
+  background: #fcb800;
+  color: #111827;
+}
+
+/* No hover, no shadow */
+.subcat-stroke-pill:hover {
+  background: #ffffff;
+}
+
+/* Mobile horizontal scroll */
+@media (max-width: 576px) {
+  .subcat-stroke-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .subcat-stroke-pill {
+    flex-shrink: 0;
+  }
+
+  .subcat-stroke-container::-webkit-scrollbar {
+    display: none;
+  }
+}

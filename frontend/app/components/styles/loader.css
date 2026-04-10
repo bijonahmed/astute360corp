@@ -1,0 +1,30 @@
+/* Full screen loader overlay */
+.fullscreen-loader-overlay {
+  position: fixed; /* cover entire screen */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6); /* semi-transparent dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* above everything */
+  flex-direction: column;
+}
+
+/* Spinner */
+.fullscreen-loader-overlay .spinner-border {
+  width: 4rem;
+  height: 4rem;
+  border-width: 0.3rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+/* Loader text */
+.fullscreen-loader-overlay .loader-text {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 500;
+}

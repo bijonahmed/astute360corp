@@ -1,0 +1,32 @@
+/* Center all footer widgets only on mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .ps-footer__widgets {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ps-footer__widgets .widget {
+    width: 100%;
+    margin-bottom: 20px; /* spacing between widgets */
+  }
+
+  .ps-footer__widgets .widget h3,
+  .ps-footer__widgets .widget h4,
+  .ps-footer__widgets .widget p,
+  .ps-footer__widgets .widget ul {
+    text-align: center;
+  }
+
+  .ps-footer__widgets .ps-list--social {
+    display: flex; /* make flex container */
+    justify-content: center; /* center horizontally */
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .ps-footer__widgets .ps-list--social li {
+    margin: 0 5px; /* spacing between icons */
+  }
+}

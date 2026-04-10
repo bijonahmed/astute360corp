@@ -1,0 +1,45 @@
+.status-card {
+  width: 450px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.status-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.status-select,
+.status-btn {
+  transition: 0.3s ease;
+}
+
+.status-select:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.status-btn:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.status-select {
+  min-width: 180px;
+}
+
+.status-btn {
+  min-width: 130px;
+}
+
+.city-table-wrapper input.form-control {
+  max-width: 250px;
+}

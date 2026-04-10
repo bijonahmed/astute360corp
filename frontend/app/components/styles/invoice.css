@@ -1,0 +1,56 @@
+
+  .invoice-container {
+    width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .info-table td {
+    padding: 6px 0;
+  }
+
+  .product-table th {
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .product-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .total-section {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: right;
+  }
+
+  .print-btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #ffc107;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  @media print {
+    .print-btn {
+      display: none;
+    }
+  }

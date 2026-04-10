@@ -1,0 +1,36 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext"; // adjust path
+
+export default function CustomerOrderList() {
+  const [orderData, setResponseData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const url = `${process.env.NEXT_PUBLIC_API_BASE}/customer/getOnlyOrderData`;
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await res.json();
+        setResponseData(result.orderHistory || []);
+
+      } catch (err) {
+        console.error("Fetch failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return { orderData, loading };
+}

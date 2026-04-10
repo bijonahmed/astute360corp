@@ -1,0 +1,89 @@
+/* Slider wrapper */
+.slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Loader */
+.slider-loader {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Each slide container */
+.slider-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Slider image wrapper */
+.slider-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 25px;
+}
+
+/* MOBILE: iPhone / small devices <640px */
+@media (max-width: 639px) {
+  .slider-image {
+    height: 100px;             /* small mobile height */
+    padding-left: 4px;         /* like bootstrap container */
+    padding-right: 4px;        /* like bootstrap container */
+    box-sizing: border-box;    /* include padding in width */
+  }
+  .slider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* fill container, slight crop if needed */
+    object-position: center;
+    display: block;            /* remove inline spacing */
+  }
+}
+
+/* Tablet: 640px–1279px */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .slider-image {
+    height: 350px;
+  }
+  .slider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Desktop: 1280px–1535px */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .slider-image {
+    height: 350px;
+  }
+  .slider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* full image visible */
+    object-position: center;
+  }
+}
+
+/* Large desktop ≥1536px */
+@media (min-width: 1536px) {
+  .slider-image {
+    height: 440px;
+  }
+  .slider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}

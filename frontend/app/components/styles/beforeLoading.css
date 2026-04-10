@@ -1,0 +1,138 @@
+/* Container */
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  min-height: 220px; /* adjust to your image ratio to avoid layout shift */
+  background-color: #fff3cd; /* soft yellow */
+  transition: background-color 400ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* When image loaded — remove yellow bg */
+.image-wrapper.loaded {
+  background-color: transparent;
+}
+
+/* Image: start invisible and blurred, then fade/sharpen in */
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(1.04);
+  transition: opacity 450ms ease, filter 450ms ease, transform 450ms ease;
+}
+
+/* Visible image state */
+.image-wrapper.loaded img {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Loading overlay (centered) */
+.loading-overlay {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* allows clicks to pass through if needed */
+}
+
+/* Loader box */
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.9rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.6)
+  );
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.12);
+  transform: translateY(-6px);
+}
+
+/* Spinner circle */
+.spinner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.35);
+  background: linear-gradient(180deg, #ffd54a 0%, #ffca28 100%);
+  position: relative;
+  animation: spinPulse 1.1s linear infinite;
+}
+
+/* Animated rotating pulse silhouette (subtle) */
+@keyframes spinPulse {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Loading text styling */
+.loading-text {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b4f00; /* dark warm brown for contrast on yellow */
+  letter-spacing: 0.02em;
+}
+
+/* Animated dots: creates looping dot-appear effect */
+.dots {
+  display: inline-block;
+  width: 2.4ch;
+  text-align: left;
+  overflow: hidden;
+}
+
+/* Keyframes for dots appearing */
+.dots::after {
+  content: " . . .";
+  display: inline-block;
+  animation: dotsAnim 1s steps(3, end) infinite;
+  transform: translateX(0);
+  opacity: 0.95;
+}
+
+@keyframes dotsAnim {
+  0% {
+    width: 0ch;
+    opacity: 0;
+  }
+  20% {
+    width: 1ch;
+    opacity: 1;
+  }
+  40% {
+    width: 2ch;
+  }
+  60% {
+    width: 2.4ch;
+  }
+  100% {
+    width: 0ch;
+    opacity: 0;
+  }
+}

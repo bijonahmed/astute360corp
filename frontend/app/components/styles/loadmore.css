@@ -1,0 +1,29 @@
+.btn-load-more {
+  background-color: #ffc107; /* bright yellow tone */
+  color: #222;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 14px 48px;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-load-more:hover {
+  background-color: #ffb300;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-load-more:active {
+  transform: scale(0.98);
+}
+
+.btn-load-more:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+

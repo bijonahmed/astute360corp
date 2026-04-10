@@ -1,0 +1,42 @@
+.search-results-mobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 9999;
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  border-radius: 5px;
+}
+
+.search-result-item-mobile {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s ease;
+}
+
+.search-result-item-mobile:hover {
+  background-color: #f8f8f8;
+}
+
+.search-result-thumb-mobile {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 12px;
+  border-radius: 4px;
+}
+
+.search-result-name-mobile {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}

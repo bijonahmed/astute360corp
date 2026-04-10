@@ -1,0 +1,30 @@
+.ps-product--detail {
+  display: flex;
+  gap: 0.5rem; /* desktop gap */
+  flex-wrap: nowrap;
+}
+
+.ps-product__thumbnail {
+  margin-right: 0.5rem;
+}
+
+.ps-product__info {
+  flex: 1;
+}
+
+/* Mobile view */
+@media (max-width: 480px) {
+  .ps-product--detail {
+    flex-direction: column; /* stack vertically */
+    gap: 0.25rem; /* smaller gap on mobile */
+  }
+
+  .ps-product__thumbnail {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .ps-product__info {
+    width: 100%;
+  }
+}

@@ -1,0 +1,95 @@
+/* Apply only to your sidebar menu, not all .nav in the app */
+.sidebar-menu.nav {
+  --bs-nav-link-padding-x: 0.25rem !important; /* tighter left/right */
+  --bs-nav-link-padding-y: 0.25rem !important; /* tighter top/bottom */
+  --bs-nav-link-color: #eee !important;        /* custom text color */
+  list-style: none !important;                 /* remove bullets */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Style the actual link items */
+.sidebar-menu.nav .nav-link {
+  padding: 2px 8px !important; /* compact padding */
+  margin: 0 !important;
+  font-weight: 400 !important;
+  color: #eee !important;
+}
+
+.sidebar-menu.nav .nav-link:hover {
+  color: #fff !important; /* hover highlight */
+  background: #333 !important;
+}
+
+/* Submenu items */
+.sidebar-menu.nav .nav-treeview .nav-link {
+  padding: 2px 16px !important; /* indent children slightly */
+  font-size: 0.9rem !important;
+}
+
+
+/* For custom datatabe styles */
+ .product-card {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .product-table thead {
+    background: #f8f9fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .product-table tbody tr {
+    transition: background 0.2s ease-in-out;
+  }
+
+  .product-table tbody tr:hover {
+    background: #f1f5f9;
+  }
+
+  .product-table td {
+    vertical-align: middle;
+  }
+
+  .img-size-32 {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+  }
+
+  .trend {
+    font-weight: 500;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .trend.up {
+    color: #28a745; /* green */
+  }
+
+  .trend.down {
+    color: #dc3545; /* red */
+  }
+
+  .action-btn {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .action-btn:hover {
+    background: #e9ecef;
+  }
+
+  .search-box input {
+    border-radius: 20px;
+    padding: 0.375rem 1rem;
+  }
+
+  /* end */
