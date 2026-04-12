@@ -1026,7 +1026,13 @@ class PublicController extends Controller
             <p>{$message}</p>
         ";
 
-        mail('mdbijon@gmail.com', "New Contact ASTUTE360: {$subject}", $body, $headers);
+        $recipients = 'mdbijon@gmail.com, info@astute360corp.com';
+
+        $sent = mail($recipients, "New Contact ASTUTE360: {$subject}", $body, $headers);
+
+        if (!$sent) {
+            throw new \Exception('Mail delivery failed.');
+        }
 
         return response()->json([
             'success' => true,
@@ -1035,7 +1041,6 @@ class PublicController extends Controller
 
     } catch (\Exception $e) {
         Log::error('Contact form email failed: ' . $e->getMessage());
-
         return response()->json([
             'success' => false,
             'message' => $e->getMessage(),
