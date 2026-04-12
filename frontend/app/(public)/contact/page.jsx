@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
     title,
     description,
     keywords: [
-      "about us",
+      "contactus",
       "IT solution company",
       "Astute360corp",
       "IT consulting",

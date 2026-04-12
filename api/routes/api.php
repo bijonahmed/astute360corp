@@ -52,8 +52,8 @@ Route::prefix('public')->group(function () {
 
 
     Route::get('/getsAllServices', [PublicController::class, 'getsAllServices']);
-     Route::get('/getsAllTraining', [PublicController::class, 'getsAllTraining']);
-
+    Route::get('/getsAllTraining', [PublicController::class, 'getsAllTraining']);
+    Route::post('/contact', [PublicController::class, 'contact']);
 
 
     Route::get('/popularPosts', [PublicController::class, 'popularPosts']);

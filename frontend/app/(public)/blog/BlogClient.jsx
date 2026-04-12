@@ -190,7 +190,6 @@ export default function BlogPage() {
         </div>
       </div>
 
-      <ClientFooter />
     </>
   );
 }

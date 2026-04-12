@@ -1,7 +1,7 @@
-"use client"; 
+"use client";
 
+import { useState } from "react";
 import useService from "../../hooks/useServiceSearch";
-
 
 const benefits = [
   { icon: "fas fa-user-tie", label: "Client-oriented" },
@@ -12,10 +12,78 @@ const benefits = [
   { icon: "fas fa-eye", label: "Transparent" },
 ];
 
-
 export default function ContactPage() {
   const serviceCategoryId = 3;
-  const { settingData } = useService(serviceCategoryId) || {};
+  // ✅ FIX: Guard against undefined — default to empty object
+  const { settingData = {} } = useService(serviceCategoryId) || {};
+
+  // ✅ FIX: Proper form state for a contact form
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+    agreed: false,
+  });
+  const [status, setStatus] = useState(null); // null | "loading" | "success" | "error"
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  // ✅ FIX: Contact form submit — no order/cart logic here
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/public/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            subject: formData.subject,
+            message: formData.message,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("success");
+        // Reset form after success
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+          agreed: false,
+        });
+      } else {
+        setStatus("error");
+        setErrorMsg(result.message || "Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -30,7 +98,6 @@ export default function ContactPage() {
           width: 100%;
         }
 
-        /* Tablet */
         @media (max-width: 991px) {
           .contact-split-section {
             grid-template-columns: 1fr;
@@ -69,15 +136,11 @@ export default function ContactPage() {
         }
 
         @media (max-width: 991px) {
-          .contact-left-panel {
-            padding: 60px 40px;
-          }
+          .contact-left-panel { padding: 60px 40px; }
         }
 
         @media (max-width: 575px) {
-          .contact-left-panel {
-            padding: 48px 24px;
-          }
+          .contact-left-panel { padding: 48px 24px; }
         }
 
         /* ─── Left Panel Typography ─────────────────────── */
@@ -143,9 +206,7 @@ export default function ContactPage() {
         }
 
         @media (max-width: 400px) {
-          .benefits-grid {
-            grid-template-columns: 1fr;
-          }
+          .benefits-grid { grid-template-columns: 1fr; }
         }
 
         .benefit-item {
@@ -190,15 +251,11 @@ export default function ContactPage() {
         }
 
         @media (max-width: 991px) {
-          .contact-right-panel {
-            padding: 60px 40px;
-          }
+          .contact-right-panel { padding: 60px 40px; }
         }
 
         @media (max-width: 575px) {
-          .contact-right-panel {
-            padding: 48px 24px;
-          }
+          .contact-right-panel { padding: 48px 24px; }
         }
 
         .form-panel-title {
@@ -226,9 +283,7 @@ export default function ContactPage() {
         }
 
         @media (max-width: 575px) {
-          .contact-form-grid {
-            grid-template-columns: 1fr;
-          }
+          .contact-form-grid { grid-template-columns: 1fr; }
         }
 
         /* ─── Fancy Inputs ──────────────────────────────── */
@@ -310,6 +365,27 @@ export default function ContactPage() {
           font-weight: 600;
         }
 
+        /* ─── Status Messages ───────────────────────────── */
+        .form-status {
+          border-radius: 10px;
+          padding: 12px 16px;
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 18px;
+        }
+
+        .form-status.success {
+          background: #eaffea;
+          color: #1a7d1a;
+          border: 1px solid #b2e5b2;
+        }
+
+        .form-status.error {
+          background: #fff0f0;
+          color: #c0392b;
+          border: 1px solid #f5c0bb;
+        }
+
         /* ─── Submit Button ─────────────────────────────── */
         .btn-send {
           background: linear-gradient(135deg, #0a1628, #1a3a6e);
@@ -331,11 +407,15 @@ export default function ContactPage() {
           width: auto;
         }
 
+        .btn-send:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
         @media (max-width: 400px) {
-          .btn-send {
-            width: 100%;
-            justify-content: center;
-          }
+          .btn-send { width: 100%; justify-content: center; }
         }
 
         .btn-send::before {
@@ -347,7 +427,7 @@ export default function ContactPage() {
           transition: opacity 0.3s ease;
         }
 
-        .btn-send:hover::before { opacity: 1; }
+        .btn-send:hover:not(:disabled)::before { opacity: 1; }
 
         .btn-send span,
         .btn-send i {
@@ -355,7 +435,7 @@ export default function ContactPage() {
           z-index: 1;
         }
 
-        .btn-send:hover {
+        .btn-send:hover:not(:disabled) {
           transform: translateY(-2px);
           box-shadow: 0 8px 24px rgba(0,194,255,0.30);
         }
@@ -369,9 +449,7 @@ export default function ContactPage() {
         }
 
         @media (max-width: 767px) {
-          .contact-info-strip {
-            padding: 32px 24px;
-          }
+          .contact-info-strip { padding: 32px 24px; }
         }
 
         .info-strip-row {
@@ -381,17 +459,11 @@ export default function ContactPage() {
         }
 
         @media (max-width: 991px) {
-          .info-strip-row {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px 0;
-          }
+          .info-strip-row { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
         }
 
         @media (max-width: 575px) {
-          .info-strip-row {
-            grid-template-columns: 1fr;
-            gap: 20px 0;
-          }
+          .info-strip-row { grid-template-columns: 1fr; gap: 20px 0; }
         }
 
         .info-strip-cell {
@@ -399,26 +471,17 @@ export default function ContactPage() {
           border-right: 1px solid #e0e8f5;
         }
 
-        .info-strip-cell:last-child {
-          border-right: none;
-        }
+        .info-strip-cell:last-child { border-right: none; }
 
         @media (max-width: 991px) {
-          /* On 2-col layout: remove right border from even cells */
           .info-strip-cell:nth-child(2),
-          .info-strip-cell:nth-child(4) {
-            border-right: none;
-          }
-          /* Add bottom border between rows */
+          .info-strip-cell:nth-child(4) { border-right: none; }
+
           .info-strip-cell:nth-child(1),
-          .info-strip-cell:nth-child(2) {
-            padding-bottom: 24px;
-            border-bottom: 1px solid #e0e8f5;
-          }
+          .info-strip-cell:nth-child(2) { padding-bottom: 24px; border-bottom: 1px solid #e0e8f5; }
+
           .info-strip-cell:nth-child(3),
-          .info-strip-cell:nth-child(4) {
-            padding-top: 0;
-          }
+          .info-strip-cell:nth-child(4) { padding-top: 0; }
         }
 
         @media (max-width: 575px) {
@@ -427,9 +490,7 @@ export default function ContactPage() {
             border-bottom: 1px solid #e0e8f5;
             padding: 16px 0;
           }
-          .info-strip-cell:last-child {
-            border-bottom: none;
-          }
+          .info-strip-cell:last-child { border-bottom: none; }
         }
 
         .info-strip-box {
@@ -495,8 +556,6 @@ export default function ContactPage() {
       `}</style>
 
       <div>
-      
-
         {/* Page Title */}
         <div className="page-title-area transparent-bg5">
           <div className="container">
@@ -534,49 +593,103 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right: form */}
+          {/* Right: contact form */}
           <div className="contact-right-panel">
             <h3 className="form-panel-title">Send Us a Message</h3>
             <p className="form-panel-sub">Fill in the form and we'll get back to you within 24 hours.</p>
 
-            <form id="contactForm">
+            {/* ✅ FIX: Success / error feedback */}
+            {status === "success" && (
+              <div className="form-status success">
+                <i className="fas fa-check-circle" style={{ marginRight: 8 }} />
+                Your message has been sent! We'll get back to you soon.
+              </div>
+            )}
+            {status === "error" && (
+              <div className="form-status error">
+                <i className="fas fa-exclamation-circle" style={{ marginRight: 8 }} />
+                {errorMsg}
+              </div>
+            )}
+
+            {/* ✅ FIX: Controlled inputs with handleChange, correct onSubmit */}
+            <form id="contactForm" onSubmit={handleSubmit}>
               <div className="contact-form-grid">
                 <div className="fancy-input">
-                  <input type="text" name="name" id="name" required placeholder="Full Name" />
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder="Full Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
                   <i className="fas fa-user input-icon" />
                 </div>
                 <div className="fancy-input">
-                  <input type="email" name="email" id="email" required placeholder="Email Address" />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
                   <i className="fas fa-envelope input-icon" />
                 </div>
                 <div className="fancy-input">
-                  <input type="text" name="phone_number" id="phone_number" required placeholder="Phone Number" />
+                  <input
+                    type="text"
+                    name="phone"
+                    required
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
                   <i className="fas fa-phone input-icon" />
                 </div>
                 <div className="fancy-input">
-                  <input type="text" name="msg_subject" id="msg_subject" required placeholder="Subject" />
+                  <input
+                    type="text"
+                    name="subject"
+                    required
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                  />
                   <i className="fas fa-tag input-icon" />
                 </div>
               </div>
 
               <div className="fancy-input textarea-wrap">
-                <textarea name="message" id="message" required placeholder="Tell us about your project or issue..." defaultValue={""} />
+                <textarea
+                  name="message"
+                  required
+                  placeholder="Tell us about your project or issue..."
+                  value={formData.message}
+                  onChange={handleChange}
+                />
                 <i className="fas fa-comment-alt input-icon" />
               </div>
 
-              <div className="terms-check">
-                <input type="checkbox" id="checkme" />
-                <label htmlFor="checkme">
-                  I accept the <a href="/terms-conditions">Terms of Services</a> and{" "}
-                  <a href="/privacy-policy">Privacy Policy</a>
-                </label>
-              </div>
 
-              <button type="submit" className="btn-send">
-                <span>Send Message</span>
-                <i className="fas fa-paper-plane" />
+              <button
+                type="submit"
+                className="btn-send"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? (
+                  <>
+                    <span>Sending...</span>
+                    <i className="fas fa-spinner fa-spin" />
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <i className="fas fa-paper-plane" />
+                  </>
+                )}
               </button>
-              <div id="msgSubmit" className="h3 text-center hidden" />
             </form>
           </div>
         </div>
@@ -589,9 +702,13 @@ export default function ContactPage() {
                 <div className="info-strip-icon"><i className="fas fa-map-marker-alt" /></div>
                 <div className="info-strip-text">
                   <h5>Address</h5>
-                  <a href="https://maps.google.com/?q=6065+Hillcroft+St+Houston+TX+77081" target="_blank" rel="noreferrer">
-                   {settingData.address ||
-                    "6065 Hillcroft St, Suite 511, Houston, TX 77081"}
+                  {/* ✅ FIX: Optional chaining prevents crash when settingData is undefined */}
+                  <a
+                    href="https://maps.google.com/?q=6065+Hillcroft+St+Houston+TX+77081"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {settingData?.address || "6065 Hillcroft St, Suite 511, Houston, TX 77081"}
                   </a>
                 </div>
               </div>
@@ -601,7 +718,9 @@ export default function ContactPage() {
                 <div className="info-strip-icon"><i className="fas fa-phone-volume" /></div>
                 <div className="info-strip-text">
                   <h5>Phone</h5>
-                  <a href="tel:+13463283273">{settingData.tel || "+1 (346) 328-3273"}</a>
+                  <a href={`tel:${settingData?.tel || "+13463283273"}`}>
+                    {settingData?.tel || "+1 (346) 328-3273"}
+                  </a>
                 </div>
               </div>
             </div>
@@ -610,7 +729,9 @@ export default function ContactPage() {
                 <div className="info-strip-icon"><i className="far fa-envelope" /></div>
                 <div className="info-strip-text">
                   <h5>Email</h5>
-                  <a href="mailto:info@astute360corp.com">{settingData.email || "info@astute360corp.com"}</a>
+                  <a href={`mailto:${settingData?.email || "info@astute360corp.com"}`}>
+                    {settingData?.email || "info@astute360corp.com"}
+                  </a>
                 </div>
               </div>
             </div>
@@ -637,8 +758,6 @@ export default function ContactPage() {
           />
         </div>
       </div>
-
-     
     </>
   );
 }

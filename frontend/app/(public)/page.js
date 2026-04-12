@@ -12,19 +12,9 @@ export default function Home() {
   const postsPerPage = 6;
   const totalPages = Math.ceil(postData.length / postsPerPage);
   const currentPosts = useMemo(() => {
-    const start = (currentPage - 1) * postsPerPage;
-    return postData.slice(start, start + postsPerPage);
-  }, [postData, currentPage]);
+    return postData.slice(-6).reverse(); // last 6 + newest first
+  }, [postData]);
   const [pageLoading, setPageLoading] = useState(false);
-  const handlePageChange = (page) => {
-    if (page === currentPage) return;
-    setPageLoading(true);
-    setTimeout(() => {
-      setCurrentPage(page);
-      setPageLoading(false);
-      //window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 400); // smooth loader delay
-  };
   useEffect(() => {
     // Dynamically load jQuery + Owl Carousel only on client
     const loadOwlCarousel = async () => {
@@ -595,44 +585,6 @@ export default function Home() {
               ) : (
                 <div className="text-center py-5">
                   <p>No blog posts found</p>
-                </div>
-              )}
-              {/* ✅ Pagination */}
-              {totalPages > 1 && (
-                <div className="col-lg-12">
-                  <div className="pagination-area text-center">
-                    {/* Prev */}
-                    <button
-                      className="page-numbers"
-                      disabled={currentPage === 1}
-                      onClick={() => handlePageChange(currentPage - 1)}
-                    >
-                      ‹
-                    </button>
-                    {/* Page Numbers */}
-                    {[...Array(totalPages)].map((_, index) => {
-                      const page = index + 1;
-                      return (
-                        <button
-                          key={page}
-                          onClick={() => handlePageChange(page)}
-                          className={`page-numbers ${
-                            currentPage === page ? "current" : ""
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      );
-                    })}
-                    {/* Next */}
-                    <button
-                      className="page-numbers"
-                      disabled={currentPage === totalPages}
-                      onClick={() => handlePageChange(currentPage + 1)}
-                    >
-                      ›
-                    </button>
-                  </div>
                 </div>
               )}
             </div>

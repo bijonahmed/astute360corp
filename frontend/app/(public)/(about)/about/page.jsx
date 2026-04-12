@@ -214,7 +214,7 @@ export default function AboutPage() {
         </div>
         {/* End CTA Area */}
       </div>
-      <ClientFooter />
+     
     </>
   );
 }

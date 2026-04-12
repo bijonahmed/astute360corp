@@ -13,26 +13,42 @@ export default function FaqPage() {
 
   const faqs = [
     {
-      q: "What Is The Design Process For Branding?",
-      a: "The branding design process involves understanding your business, audience, and goals, followed by brainstorming, concept creation, and refinement. It includes logo design, typography, color schemes, and brand guidelines."
+      q: "What services does Astute360corp provide?",
+      a: "Astute360corp is an all-in-one IT solution company offering web development, mobile app development, software solutions, digital marketing, cloud services, and IT consulting to help businesses grow efficiently."
     },
     {
-      q: "How Much Does Logo Design Services Cost?",
-      a: "Logo design costs vary based on complexity, designer expertise, and project requirements. Prices can range from affordable options for startups to premium services."
+      q: "Why should I choose Astute360corp?",
+      a: "Since 2019, Astute360corp has been delivering quality IT solutions with an expert team, transparent workflow, and a strong focus on understanding client needs to ensure the best possible outcomes."
     },
     {
-      q: "What Is Included In A Round Of Revisions?",
-      a: "A revision round typically includes updates based on your feedback such as color adjustments, layout changes, or font tweaks."
+      q: "Do you provide custom software solutions?",
+      a: "Yes, we specialize in building custom software tailored to your business requirements. Our team works closely with you to understand your goals and deliver scalable and efficient solutions."
     },
     {
-      q: "How Long Does A Project Take?",
-      a: "Project timelines depend on complexity, but most branding projects take between 1–4 weeks from concept to final delivery."
+      q: "How long does it take to complete a project?",
+      a: "Project timelines vary depending on complexity and requirements. Small projects may take a few days, while larger systems can take several weeks. We always provide a clear timeline before starting."
+    },
+    {
+      q: "Do you offer 24/7 support?",
+      a: "Yes, we provide 24/7 support to ensure your systems run smoothly. Our support team is always ready to assist you with any technical issues or urgent requirements."
+    },
+    {
+      q: "Can you help improve my business online presence?",
+      a: "Absolutely! We offer SEO, social media marketing, and data-driven digital strategies to increase your brand visibility and drive more traffic and conversions."
+    },
+    {
+      q: "What industries do you work with?",
+      a: "We work with a wide range of industries including healthcare, e-commerce, education, corporate businesses, and startups, providing tailored IT solutions for each sector."
+    },
+    {
+      q: "How can I get started with Astute360corp?",
+      a: "You can contact us through our website or call our team. We will discuss your requirements, analyze your needs, and provide the best solution to achieve your business goals."
     }
   ];
 
   return (
     <>
-      <ClientNavbar />
+    
 
       {/* Page Title */}
       <div className="page-title-area transparent-bg1">
@@ -55,6 +71,9 @@ export default function FaqPage() {
               FAQ
             </span>
             <h2 style={{ fontWeight: "700" }}>Frequently Asked Questions</h2>
+            <p style={{ maxWidth: "600px", margin: "10px auto", color: "#666" }}>
+              Learn more about Astute360corp, our services, and how we help businesses grow with modern IT solutions.
+            </p>
           </div>
 
           <div className="row justify-content-center">
@@ -97,7 +116,7 @@ export default function FaqPage() {
                   {/* Answer */}
                   <div
                     style={{
-                      maxHeight: active === index ? "200px" : "0",
+                      maxHeight: active === index ? "250px" : "0",
                       overflow: "hidden",
                       transition: "0.4s ease",
                       padding: active === index ? "15px 20px" : "0 20px",
@@ -115,7 +134,6 @@ export default function FaqPage() {
         </div>
       </div>
 
-      <ClientFooter />
     </>
   );
 }

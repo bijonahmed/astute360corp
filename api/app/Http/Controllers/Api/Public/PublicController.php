@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 use Attribute;
 use DB;
 use File;
@@ -263,13 +265,13 @@ class PublicController extends Controller
         //dd($checkCategories);
 
 
-        // ✅ Only check slug if both category and subcategory are NOT provided
+        // âœ… Only check slug if both category and subcategory are NOT provided
         if (empty($category_id) && empty($subcategory_id) && !empty($slug)) {
             $checkCategories = ProductCategory::where('slug', $slug)->first();
             $subcategory_id  = $checkCategories->id ?? null;
         }
         $inSubcategory_id  = $checkCategories->id ?? null;
-        // ✅ Build the query
+        // âœ… Build the query
         $query = Product::where('status', 1);
         if (!empty($category_id)) {
             $query->where('categoryId', $category_id);
@@ -431,7 +433,7 @@ class PublicController extends Controller
         try {
             $categories = ProductCategory::where('status', 1)->where('tabs_status', 1)->orderBy('sorting', 'asc')->get();
             $grouped    = $categories->groupBy('parent_id');
-            // 🔹 Recursive closure to build tree
+            // ðŸ”¹ Recursive closure to build tree
             $buildTree = function ($parentId) use (&$buildTree, $grouped) {
                 return $grouped->get($parentId, collect())->map(function ($category) use ($buildTree, $grouped) {
                     // Get up to 6 products for this category
@@ -454,7 +456,7 @@ class PublicController extends Controller
                     // Recursively build child categories
                     $children = $buildTree($category->id)->take(10);
 
-                    // 🔹 Check if any category has parent_child_id = current category id
+                    // ðŸ”¹ Check if any category has parent_child_id = current category id
                     $hasInSubCategory = $category->where('parent_child_id', $category->id)->first();
 
 
@@ -468,17 +470,17 @@ class PublicController extends Controller
                         'banner_image'    => $category->banner_image ? url($category->banner_image) : null,
                         'children'        => $children,       // nested categories
                         'products'        => $filterProducts, // related products
-                        'insub_category'  => $hasInSubCategory ? true : false, // 🔹 new flag
+                        'insub_category'  => $hasInSubCategory ? true : false, // ðŸ”¹ new flag
                     ];
                 });
             };
 
 
 
-            // 🔹 Start recursion from root categories (parent_id = 0)
+            // ðŸ”¹ Start recursion from root categories (parent_id = 0)
             $nestedCategories = $buildTree(0);
 
-            // 🔹 Return JSON
+            // ðŸ”¹ Return JSON
             return response()->json([
                 'success' => true,
                 'data'    => $nestedCategories,
@@ -660,7 +662,7 @@ class PublicController extends Controller
     {
         $post = Product::where('slug', $slug)->first();
 
-        // ✅ 404 if not found
+        // âœ… 404 if not found
         if (!$post) {
             return response()->json([
                 'success' => false,
@@ -668,7 +670,7 @@ class PublicController extends Controller
             ], 404);
         }
 
-        // ✅ Related posts
+        // âœ… Related posts
         $relatedPosts = Product::where('status', 1)
             ->where('categoryId', $post->categoryId) // better dynamic
             ->where('id', '!=', $post->id) // exclude current
@@ -687,7 +689,7 @@ class PublicController extends Controller
             ];
         });
 
-        // ✅ Main post data
+        // âœ… Main post data
         $data = [
             'id' => $post->id,
             'title' => $post->name,
@@ -716,7 +718,7 @@ class PublicController extends Controller
     {
         $post = Post::where('slug', $slug)->first();
 
-        // ✅ 404 if not found
+        // âœ… 404 if not found
         if (!$post) {
             return response()->json([
                 'success' => false,
@@ -724,7 +726,7 @@ class PublicController extends Controller
             ], 404);
         }
 
-        // ✅ Related posts
+        // âœ… Related posts
         $relatedPosts = Post::where('status', 1)
             ->where('categoryId', $post->categoryId) // better dynamic
             ->where('id', '!=', $post->id) // exclude current
@@ -743,7 +745,7 @@ class PublicController extends Controller
             ];
         });
 
-        // ✅ Main post data
+        // âœ… Main post data
         $data = [
             'id' => $post->id,
             'title' => $post->name,
@@ -808,9 +810,9 @@ class PublicController extends Controller
                 'id'              => $data->id,
                 'name'            => $data->name,
                 'slug'            => $data->slug,
-                'description_full'=> $data->description_full,
+                'description_full' => $data->description_full,
                 'meta_title'      => $data->meta_title,
-                'meta_description'=> $data->meta_description,
+                'meta_description' => $data->meta_description,
                 'meta_keyword'    => $data->meta_keyword,
                 'createdAt'       => date("d-M-Y", strtotime($data->created_at)),
                 'thumnail_img'    => $data->thumnail_img ? url($data->thumnail_img) : null,
@@ -823,7 +825,7 @@ class PublicController extends Controller
         return response()->json([
             'success'               => true,
             'data'                  => $get_prdoucts,
-            'settingData'           => $settingData,    
+            'settingData'           => $settingData,
 
         ], 200);
     }
@@ -841,9 +843,9 @@ class PublicController extends Controller
                 'id'              => $data->id,
                 'name'            => $data->name,
                 'slug'            => $data->slug,
-                'description_full'=> $data->description_full,
+                'description_full' => $data->description_full,
                 'meta_title'      => $data->meta_title,
-                'meta_description'=> $data->meta_description,
+                'meta_description' => $data->meta_description,
                 'meta_keyword'    => $data->meta_keyword,
                 'createdAt'       => date("d-M-Y", strtotime($data->created_at)),
                 'thumnail_img'    => $data->thumnail_img ? url($data->thumnail_img) : null,
@@ -971,6 +973,78 @@ class PublicController extends Controller
             'related_prdoucts'      => $related_prdoucts,
         ], 200);
     }
+
+    /*
+    public function contact(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'message' => 'required',
+        ]);
+
+        // Log the contact message (you can replace this with actual email sending logic)
+       // Log::info('Contact Message Received:', $validatedData);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for contacting us. We will get back to you shortly.'
+        ]);
+    }
+    */
+     //START
+     public function contact(Request $request)
+{
+    $validated = $request->validate([
+        'name'    => 'required|max:255',
+        'email'   => 'required|email|max:255',
+        'phone'   => 'nullable|max:20',
+        'subject' => 'nullable|max:255',
+        'message' => 'required',
+    ]);
+
+    try {
+        $name    = htmlspecialchars($validated['name']);
+        $email   = htmlspecialchars($validated['email']);
+        $phone   = htmlspecialchars($validated['phone']   ?? 'N/A');
+        $subject = htmlspecialchars($validated['subject'] ?? 'No Subject');
+        $message = nl2br(htmlspecialchars($validated['message']));
+
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: {$name} <{$email}>\r\n";
+        $headers .= "Reply-To: {$email}\r\n";
+
+        $body = "
+            <h2>New Contact Message</h2>
+            <p><strong>Name:</strong> {$name}</p>
+            <p><strong>Email:</strong> {$email}</p>
+            <p><strong>Phone:</strong> {$phone}</p>
+            <p><strong>Subject:</strong> {$subject}</p>
+            <hr>
+            <p><strong>Message:</strong></p>
+            <p>{$message}</p>
+        ";
+
+        mail('mdbijon@gmail.com', "New Contact ASTUTE360: {$subject}", $body, $headers);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for contacting us. We will get back to you shortly.',
+        ]);
+
+    } catch (\Exception $e) {
+        Log::error('Contact form email failed: ' . $e->getMessage());
+
+        return response()->json([
+            'success' => false,
+            'message' => $e->getMessage(),
+        ], 500);
+    }
+}
+     //END
+      
+      
 
     public function testApiCallbackHook(Request $request)
     {
