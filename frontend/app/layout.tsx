@@ -1,5 +1,5 @@
 export default function RootLayout({ children }) {
-  
+
   return (
     <html lang="en">
       <head>
@@ -22,14 +22,14 @@ export default function RootLayout({ children }) {
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="author" content="Bir Ecommerce" />
+        <meta name="author" content="Astute360corp" />
         <meta
           name="keywords"
-          content="Foldable Clothes Drying Racks, Vikars Ladder, WD-40 Anti Rust Spray, Bir Tools, Makita Power Tools, tools, hardware, home improvement, DIY, marketplace, shopping"
+          content="Astute360corp, IT solutions, technology consulting, staff augmentation, software development, web development, mobile app development, digital marketing, IT services, Houston TX"
         />
         <meta
           name="description"
-          content="Shop high-quality tools and hardware including Foldable Clothes Drying Racks, Vikars Ladder, WD-40 Anti Rust Spray, Bir Tools, and Makita Power Tools. Perfect for DIY and home improvement projects."
+          content="Astute360corp provides trusted IT solutions including software development, web development, mobile app development, digital marketing, and technology consulting services for startups and enterprises."
         />
 
         {/* CDN CSS links */}

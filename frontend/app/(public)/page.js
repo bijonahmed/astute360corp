@@ -84,7 +84,7 @@ export default function Home() {
                     their objectives.
                   </p>
                   <div className="btn-box">
-                    <a href="#" className="store-btn">
+                    <a href="/astute360.apk" className="store-btn">
                       <img
                         src="/frontend_theme/images/play-store.png"
                         alt="image"
@@ -484,7 +484,7 @@ export default function Home() {
                     support.
                   </p>
                   <div className="btn-box">
-                    <a href="#" className="store-btn">
+                    <a href="/astute360.apk" className="store-btn">
                       <img
                         src="/frontend_theme/images/play-store.png"
                         alt="Download Astute360corp App"

@@ -15,10 +15,14 @@ export default function FrontendAssets() {
         />
         <meta name="format-detection" content="telephone=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="author" content="Bir Group" />
+        <meta name="author" content="Astute360corp" />
         <meta
           name="keywords"
-          content="ecommerce, marketplace, shopping, html template, bootstrap"
+          content="Astute360corp, IT solutions, technology consulting, staff augmentation, software development, web development, mobile app development, digital marketing, IT services, Houston TX"
+        />
+        <meta
+          name="description"
+          content="Astute360corp provides trusted IT solutions including software development, web development, mobile app development, digital marketing, and technology consulting services for startups and enterprises."
         />
 
         <title>
