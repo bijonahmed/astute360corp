@@ -161,7 +161,7 @@ p:last-child {
 }
 
 .ptb-100 {
-  padding-top: 40px;
+  padding-top: 100px;
   padding-bottom: 100px;
 }
 
@@ -3114,8 +3114,8 @@ App Banner Area CSS
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 .app-banner-area .container {
   max-width: 1450px;
@@ -4062,7 +4062,7 @@ About Area CSS
 
 .startup-about-content {
   padding-left: 15px;
-  max-width: 100%;
+  max-width: 600px;
 }
 .startup-about-content .sub-title {
   display: block;
@@ -10800,7 +10800,7 @@ Page Title Area CSS
   background-color: #f9faff;
   background-size: cover;
   padding-top: 160px;
-  padding-bottom: 50px;
+  padding-bottom: 170px;
 }
 .page-title-area.transparent-bg1 {
   background-image: url(../images/page-title-bg1.jpg);
@@ -10864,7 +10864,7 @@ Page Title Area CSS
   background-image: url(../images/page-title-bg-image3.jpg);
 }
 .page-title-area.bg4 {
-  background-image: url(../images/bg4.jpg);
+  background-image: url(../images/page-title-bg-image4.jpg);
 }
 .page-title-area.bg5 {
   background-image: url(../images/page-title-bg-image5.jpg);
@@ -10880,8 +10880,8 @@ Page Title Area CSS
 .page-title-area.style-four {
   position: relative;
   z-index: 1;
-  padding-top: 40px;
-  padding-bottom: 50px;
+  padding-top: 170px;
+  padding-bottom: 170px;
 }
 .page-title-area.style-four::before {
   content: "";

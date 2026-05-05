@@ -1,4 +1,5 @@
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <head>
@@ -7,9 +8,7 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=yes"
         />
-
         <meta name="color-scheme" content="light dark" />
-
         <meta
           name="theme-color"
           content="#007bff"
@@ -23,20 +22,15 @@ export default function RootLayout({ children }) {
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-
-        <meta name="author" content="FutureGenIT" />
-
+        <meta name="author" content="Astute360corp" />
         <meta
           name="keywords"
-          content="FutureGenIT, IT solutions, software development, web development, mobile app development, SaaS development, technology consulting, staff augmentation, cloud solutions, DevOps services, API integration, enterprise software, AI solutions, digital transformation, IT services USA, global IT company"
+          content="Astute360corp, IT solutions, technology consulting, staff augmentation, software development, web development, mobile app development, digital marketing, IT services, Houston TX"
         />
-
         <meta
           name="description"
-          content="FutureGenIT is a global technology company providing software development, web & mobile app development, SaaS solutions, cloud services, AI integration, and IT consulting for startups and enterprises worldwide."
+          content="Astute360corp provides trusted IT solutions including software development, web development, mobile app development, digital marketing, and technology consulting services for startups and enterprises."
         />
-
-        <title>FutureGenIT - IT Solutions & Software Development Company</title>
 
         {/* CDN CSS links */}
         <link

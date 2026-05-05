@@ -21,7 +21,7 @@ export default function BlogPage({ params }) {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE}/public/checkedProductRow/${slug}`,
-        { cache: "no-store" },
+        { cache: "no-store" }
       );
       const result = await res.json();
       setData(result.data || null);
@@ -37,7 +37,7 @@ export default function BlogPage({ params }) {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE}/public/getsAllServices`,
-        { cache: "no-store" },
+        { cache: "no-store" }
       );
       const result = await res.json();
       setPopularPosts(result.data || []);
@@ -58,7 +58,7 @@ export default function BlogPage({ params }) {
     if (!searchTerm) return popularPosts;
 
     return popularPosts.filter((post) =>
-      post.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      post.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [popularPosts, searchTerm]);
 
@@ -72,9 +72,6 @@ export default function BlogPage({ params }) {
             <ul>
               <li>
                 <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/services">Services</Link>
               </li>
               <li>Service Details</li>
             </ul>
@@ -92,76 +89,39 @@ export default function BlogPage({ params }) {
               {/* LEFT CONTENT */}
               <div className="col-lg-8 col-md-12">
                 <div className="blog-details-desc">
-                  <div className="article-image" style={{ width: "100%" }}>
+                  <div className="article-image">
                     <img
                       src={data.image || "/frontend_theme/blog/blog-img4.jpg"}
                       alt={data.name}
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        display: "block",
-                        borderRadius: "12px",
-                      }}
                     />
                   </div>
 
-                  <div className="text-center my-4">
-                    <a
-                      href="/documentation"
-                      target="_blank"
-                      className="btn position-relative overflow-hidden fw-semibold text-white"
-                      style={{
-                        background: "linear-gradient(135deg, #4f46e5, #9333ea)",
-                        border: "none",
-                        padding: "14px 36px",
-                        borderRadius: "40px",
-                        fontSize: "16px",
-                        letterSpacing: "0.5px",
-                        transition: "all 0.3s ease",
-                        boxShadow: "0 8px 25px rgba(79,70,229,0.4)",
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.transform =
-                          "translateY(-3px) scale(1.03)";
-                        e.currentTarget.style.boxShadow =
-                          "0 15px 35px rgba(147,51,234,0.6)";
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.transform =
-                          "translateY(0) scale(1)";
-                        e.currentTarget.style.boxShadow =
-                          "0 8px 25px rgba(79,70,229,0.4)";
-                      }}
-                    >
-                      {/* Shine effect */}
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: "-75%",
-                          width: "50%",
-                          height: "100%",
-                          background:
-                            "linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent)",
-                          transform: "skewX(-25deg)",
-                          transition: "0.7s",
-                        }}
-                        className="shine"
-                      ></span>
-                      <span
-                        onMouseEnter={(e) => {
-                          const shine =
-                            e.currentTarget.parentElement.querySelector(
-                              ".shine",
-                            );
-                          shine.style.left = "125%";
-                        }}
-                      />
-                      📘 Explore Documentation
-                    </a>
-                  </div>
-
                   <div className="article-content" style={{ color: "#000" }}>
+                    <div className="entry-meta mb-3">
+                      <ul
+                        style={{
+                          display: "flex",
+                          gap: "20px",
+                          padding: 0,
+                          listStyle: "none",
+                          fontSize: "14px",
+                          color: "#555",
+                        }}
+                      >
+                        <li>
+                          <i className="far fa-user-circle" />{" "}
+                          <span>{data.author || "Admin"}</span>
+                        </li>
+
+                        <li>
+                          <i className="far fa-calendar-alt" />{" "}
+                          <time dateTime={data.created_at}>
+                            {data.created_at}
+                          </time>
+                        </li>
+                      </ul>
+                    </div>
+
                     <h1
                       style={{
                         fontSize: "28px",
@@ -182,7 +142,6 @@ export default function BlogPage({ params }) {
                       style={{
                         fontSize: "16px",
                         lineHeight: "1.9",
-                        textAlign: "justify",
                         color: "#111",
                       }}
                     />
@@ -193,6 +152,7 @@ export default function BlogPage({ params }) {
               {/* RIGHT SIDEBAR */}
               <div className="col-lg-4 col-md-12">
                 <aside className="widget-area extra-padding">
+
                   {/* SEARCH (ACTIVE) */}
                   <div className="widget widget_search">
                     <form
@@ -223,7 +183,9 @@ export default function BlogPage({ params }) {
                   <div className="widget widget_noke_posts_thumb">
                     <h3 className="widget-title">Popular Posts</h3>
 
-                    {filteredPosts.length === 0 && <p>No posts found</p>}
+                    {filteredPosts.length === 0 && (
+                      <p>No posts found</p>
+                    )}
 
                     {filteredPosts.map((post) => (
                       <article
@@ -270,6 +232,7 @@ export default function BlogPage({ params }) {
                       </article>
                     ))}
                   </div>
+
                 </aside>
               </div>
             </div>

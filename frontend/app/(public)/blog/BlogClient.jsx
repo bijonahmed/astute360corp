@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-
+import ClientNavbar from "../../components/frontend/ClientNavbar";
+import ClientFooter from "../../components/frontend/ClientFooter";
 import usePost from "../../hooks/useBlogPostSearch";
 
 export default function BlogPage() {
@@ -107,7 +108,10 @@ export default function BlogPage() {
                         }}
                       >
                         <ul className="meta">
-                        
+                          <li>
+                            <i className="far fa-calendar-alt" />{" "}
+                            {post.createdAt}
+                          </li>
                           <li>
                             <i className="far fa-user-circle" /> {post.vendor}
                           </li>

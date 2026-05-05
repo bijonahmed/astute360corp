@@ -72,15 +72,27 @@ export default function Home() {
     <>
       <div>
         {/* Start Banner Area */}
-        <div className="app-banner-area d-none">
+        <div className="app-banner-area">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-6 col-md-12">
-                <div className="app-banner-content space-y-5">
-                  <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
-                    Your Trusted Technology Solutions Provider{" "}
-                    <span className="text-blue-600">FutureGenIT</span>
-                  </h1>
+                <div className="app-banner-content">
+                  <h1>Your trusted technology solutions provider </h1>
+                  <p>
+                    The goal of IT services is to provide efficient and
+                    effective technology solutions that help businesses achieve
+                    their objectives.
+                  </p>
+                  <div className="btn-box">
+                    <a href="/astute360.apk" className="store-btn">
+                      <img
+                        src="/frontend_theme/images/play-store.png"
+                        alt="image"
+                      />
+                      Download on
+                      <span>Our Mobile Apps</span>
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="col-lg-6 col-md-12">
@@ -94,115 +106,60 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <Slider />
         {/* End Banner Area */}
         {/* Start About Area */}
-        <div
-          className="about-area"
-          style={{
-            padding: "clamp(10px, 8vw, 50px) 15px",
-            background: "#3e6cb712", // ✅ clean transparent
-          }}
-        >
-          <div
-            className="container"
-            style={{
-              maxWidth: "1200px",
-              margin: "0 auto",
-            }}
-          >
-            {/* Card */}
-            <div
-              style={{
-                background: "#ffffffb5",
-                borderRadius: "20px",
-                padding: "clamp(20px, 5vw, 50px)",
-                border: "1px solid #eef2ff",
-              }}
-            >
-              {/* Title */}
-              <h2
-                style={{
-                  fontSize: "clamp(22px, 4vw, 34px)", // ✅ responsive font
-                  fontWeight: "800",
-                  marginBottom: "20px",
-                  color: "#111827",
-                  lineHeight: "1.3",
-                }}
-              >
-                FutureGenIT – Trusted Global IT Partner for Startups &
-                Enterprises
-              </h2>
-
-              {/* Paragraph */}
-              <p
-                style={{
-                  textAlign: "justify",
-                  color: "#4b5563",
-                  lineHeight: "1.8",
-                  fontSize: "clamp(14px, 2.5vw, 16px)", // ✅ responsive text
-                }}
-              >
-                <strong>
-                  Founded in 2020, FutureGenIT is a forward-thinking technology
-                  company powered by experienced IT professionals dedicated to
-                  building scalable, secure, and high-performance digital
-                  solutions.
-                </strong>
+        <div className="about-area ptb-100">
+          <div className="container">
+            <div className="section-title">
+              <h2>About Us</h2>
+              <p>
+                We provide perfect IT solutions & technology for any startups.
               </p>
-
-              <p
-                style={{
-                  textAlign: "justify",
-                  color: "#6b7280",
-                  lineHeight: "1.8",
-                  fontSize: "clamp(14px, 2.5vw, 16px)",
-                }}
-              >
-                We help startups, SMEs, and enterprises transform ideas into
-                powerful digital products through software development, IT
-                consulting, and scalable architecture solutions.
-              </p>
-
-              {/* Features Grid */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", // ✅ responsive fix
-                  gap: "12px",
-                  marginTop: "30px",
-                }}
-              >
-                {[
-                  "End-to-End Software Development",
-                  "Web, Mobile & SaaS Development",
-                  "IT Staff Augmentation",
-                  "Cloud & DevOps Solutions",
-                  "API & Integration Services",
-                  "Enterprise Systems",
-                  "AI & Automation",
-                  "Global Clients",
-                  "24/7 Support",
-                  "Scalable Cloud Architecture",
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      background: "#f9fafb",
-                      padding: "12px",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      border: "1px solid #e5e7eb",
-                      fontSize: "clamp(13px, 2.2vw, 14px)",
-                    }}
-                  >
-                    <span style={{ color: "#2563eb" }}>✔</span>
-                    {item}
-                  </div>
-                ))}
+            </div>
+            <div className="row align-items-center">
+              {/* Left Content */}
+              <div className="col-lg-6 col-md-12">
+                <div className="app-about-content">
+                  <h3>Trusted IT Partner for Startups & Enterprises</h3>
+                  <p>
+                    <strong>
+                      Founded in 2019, managed by professionals from an IT
+                      background with years of industry experience.
+                    </strong>
+                  </p>
+                  <p>
+                    We offer technology consulting and staff augmentation
+                    services, with an operational presence in the United States.
+                    Our expertise spans across diverse IT domains, making us a
+                    preferred choice among several U.S.-based clients.
+                  </p>
+                  <ul className="features-list">
+                    <li>
+                      <i className="fas fa-check-circle" /> Technology
+                      Consulting Services
+                    </li>
+                    <li>
+                      <i className="fas fa-check-circle" /> Staff Augmentation
+                      Solutions
+                    </li>
+                    <li>
+                      <i className="fas fa-check-circle" /> Trusted by
+                      U.S.-based Clients
+                    </li>
+                  </ul>
+                  <Link href="/about" className="default-btn app-color">
+                    Learn More <i className="fas fa-chevron-right" />
+                  </Link>
+                </div>
+              </div>
+              {/* Right Image */}
+              <div className="col-lg-6 col-md-12">
+                <div className="app-about-image">
+                  <img
+                    src="/frontend_theme/images/about-img4.png"
+                    alt="About IT Solutions"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -321,25 +278,23 @@ export default function Home() {
               </div>
               {/* Consulting to Permanent */}
               <div className="col-lg-4 col-md-6 col-sm-6">
-                <div className="features-box text-center p-4">
+                <div className="features-box text-center">
                   <svg
                     width="50"
                     height="50"
                     fill="none"
-                    stroke="#0d6efd"
+                    stroke="#ff5f5f"
                     strokeWidth="2"
-                    className="mb-3"
                   >
                     <circle cx="18" cy="20" r="6" />
                     <circle cx="32" cy="20" r="6" />
                     <path d="M10 40c2-6 8-8 16-8s14 2 16 8" />
                   </svg>
-
-                  <h3 className="h5 fw-bold">AI & Smart Automation</h3>
-
-                  <p className="text-muted">
-                    FutureGenIT delivers AI-powered solutions and intelligent
-                    automation systems that help businesses improve efficiency.
+                  <h3>Consulting to Permanent</h3>
+                  <p>
+                    Flexible hiring model that allows you to evaluate
+                    consultants and convert them into full-time employees
+                    easily.
                   </p>
                 </div>
               </div>
@@ -348,7 +303,104 @@ export default function Home() {
         </div>
         {/* End Features Area */}
         {/* Start App Screenshot Area */}
-
+        <div
+          className="partner-area ptb-80 mb-5"
+          style={{ background: "#f9f9f9" }}
+        >
+          <div className="container">
+            <h3 className="text-center mb-2">Our Clients</h3>
+            <div className="partner-slides owl-carousel owl-theme">
+              {/* Item 1 */}
+              <div className="partner-item text-center">
+                <div
+                  style={{
+                    border: "1px solid #eee",
+                    borderRadius: "10px",
+                    padding: "20px",
+                    background: "#fff",
+                    margin: "10px",
+                  }}
+                >
+                  <img
+                    src="/frontend_theme/images/client/acc_logo_black_purple_rgb.png"
+                    alt="client"
+                    style={{
+                      width: "100%",
+                      height: "60px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </div>
+              {/* Item 2 */}
+              <div className="partner-item text-center">
+                <div
+                  style={{
+                    border: "1px solid #eee",
+                    borderRadius: "10px",
+                    padding: "20px",
+                    background: "#fff",
+                    margin: "10px",
+                  }}
+                >
+                  <img
+                    src="/frontend_theme/images/client/cog_logo.png"
+                    alt="client"
+                    style={{
+                      width: "100%",
+                      height: "60px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </div>
+              {/* Item 3 */}
+              <div className="partner-item text-center">
+                <div
+                  style={{
+                    border: "1px solid #eee",
+                    borderRadius: "10px",
+                    padding: "20px",
+                    background: "#fff",
+                    margin: "10px",
+                  }}
+                >
+                  <img
+                    src="/frontend_theme/images/client/emergent-logo-header.png"
+                    alt="client"
+                    style={{
+                      width: "100%",
+                      height: "60px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </div>
+              {/* Item 4 */}
+              <div className="partner-item text-center">
+                <div
+                  style={{
+                    border: "1px solid #eee",
+                    borderRadius: "10px",
+                    padding: "20px",
+                    background: "#fff",
+                    margin: "10px",
+                  }}
+                >
+                  <img
+                    src="/frontend_theme/images/client/radient-inc.png"
+                    alt="client"
+                    style={{
+                      width: "100%",
+                      height: "60px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* End App Screenshot Area */}
         {/* Start Pricing Area */}
         {/* End Pricing Area */}
@@ -360,54 +412,45 @@ export default function Home() {
                 {/* Review 1 */}
                 <div className="testimonials-item">
                   <i className="icon flaticon-quotation" />
-
                   <p>
-                    “FutureGenIT helped our startup streamline operations and
-                    build a scalable software system. Their technical expertise
-                    and support played a key role in our rapid growth.”
+                    “Astute360corp IT Solutions helped our startup optimize IT
+                    operations and implement robust software solutions. Their
+                    expertise ensures scalable growth.”
                   </p>
-
                   <div className="info d-flex align-items-center justify-content-center">
                     <div className="title">
-                      <h3>Daniel Carter</h3>
-                      <span>Founder, SaaS Startup</span>
+                      <h3>Allan Morris</h3>
+                      <span>Director, Tech Startup</span>
                     </div>
                   </div>
                 </div>
-
                 {/* Review 2 */}
                 <div className="testimonials-item">
                   <i className="icon flaticon-quotation" />
-
                   <p>
-                    “Working with FutureGenIT was a great experience. Their web
-                    and mobile application development significantly improved
-                    our customer engagement and business performance.”
+                    “Working with Astute360corp was seamless. Their web and
+                    mobile app development significantly improved our client
+                    engagement and business efficiency.”
                   </p>
-
                   <div className="info d-flex align-items-center justify-content-center">
                     <div className="title">
-                      <h3>Emily Roberts</h3>
-                      <span>CEO, E-Commerce Platform</span>
+                      <h3>Sarah Taylor</h3>
+                      <span>CEO, E-Commerce Firm</span>
                     </div>
                   </div>
                 </div>
-
                 {/* Review 3 */}
                 <div className="testimonials-item">
                   <i className="icon flaticon-quotation" />
-
                   <p>
-                    “FutureGenIT’s IT consulting and staff augmentation services
-                    helped us scale our engineering team efficiently. They are
-                    professional, reliable, and highly skilled technology
-                    partners.”
+                    “Astute360corp’s technology consulting and staff
+                    augmentation empowered our team to scale efficiently.
+                    Professional, knowledgeable, and reliable IT partners.”
                   </p>
-
                   <div className="info d-flex align-items-center justify-content-center">
                     <div className="title">
-                      <h3>Michael Anderson</h3>
-                      <span>CTO, FinTech Company</span>
+                      <h3>Michael Johnson</h3>
+                      <span>CTO, Finance Company</span>
                     </div>
                   </div>
                 </div>
@@ -417,19 +460,54 @@ export default function Home() {
         </div>
         {/* End Testimonials Area */}
         {/* Start App Download Area */}
-
+        <div className="app-download-area pt-100">
+          <div className="container">
+            <div className="row align-items-center">
+              {/* Image Section */}
+              <div className="col-lg-6 col-md-12">
+                <div className="app-download-image">
+                  <img
+                    src="/frontend_theme/images/app-download.png"
+                    alt="Astute360corp Mobile App"
+                  />
+                </div>
+              </div>
+              {/* Content Section */}
+              <div className="col-lg-6 col-md-12">
+                <div className="app-download-content">
+                  <span className="sub-title">DOWNLOAD APP</span>
+                  <h2>Stay Connected With Astute360corp On The Go</h2>
+                  <p>
+                    Our mobile app lets you manage IT solutions, track projects,
+                    and access consulting services anytime, anywhere. Designed
+                    for startups and businesses seeking reliable technology
+                    support.
+                  </p>
+                  <div className="btn-box">
+                    <a href="/astute360.apk" className="store-btn">
+                      <img
+                        src="/frontend_theme/images/play-store.png"
+                        alt="Download Astute360corp App"
+                      />
+                      Download on
+                      <span>Our Apps</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* End App Download Area */}
         {/* Start Blog Area */}
-        <div className="blog-area pt-10 pb-70">
+        <div className="blog-area pt-100 pb-70">
           <div className="container">
             <div className="section-title">
               <h2>Our Latest News</h2>
               <p>
-                Stay updated with the latest insights, innovations, and
-                technology trends from FutureGenIT. Discover how modern software
-                solutions, cloud systems, and digital transformation are helping
-                businesses grow and stay competitive in a fast-changing digital
-                world.
+                Stay updated with the latest insights, trends, and tips from
+                Astute360corp IT Solutions. Explore how technology is
+                transforming businesses.
               </p>
             </div>
             <div className="row justify-content-center">
@@ -476,10 +554,10 @@ export default function Home() {
                         }}
                       >
                         <ul className="meta">
-                          {/* <li>
+                          <li>
                             <i className="far fa-calendar-alt" />{" "}
                             {post.createdAt}
-                          </li> */}
+                          </li>
                           <li>
                             <i className="far fa-user-circle" /> {post.vendor}
                           </li>
