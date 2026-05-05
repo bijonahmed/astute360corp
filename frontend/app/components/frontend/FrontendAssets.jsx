@@ -13,21 +13,39 @@ export default function FrontendAssets() {
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="author" content="Astute360corp" />
         <meta
-          name="keywords"
-          content="Astute360corp, IT solutions, technology consulting, staff augmentation, software development, web development, mobile app development, digital marketing, IT services, Houston TX"
-        />
-        <meta
-          name="description"
-          content="Astute360corp provides trusted IT solutions including software development, web development, mobile app development, digital marketing, and technology consulting services for startups and enterprises."
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=yes"
         />
 
-        <title>
-          Astute360corp - Your trusted technology solutions provider
-        </title>
+        <meta name="color-scheme" content="light dark" />
+
+        <meta
+          name="theme-color"
+          content="#007bff"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#1a1a1a"
+          media="(prefers-color-scheme: dark)"
+        />
+
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <meta name="author" content="FutureGenIT" />
+
+        <meta
+          name="keywords"
+          content="FutureGenIT, IT solutions, software development, web development, mobile app development, SaaS development, technology consulting, staff augmentation, cloud solutions, DevOps services, API integration, enterprise software, AI solutions, digital transformation, IT services USA, global IT company"
+        />
+
+        <meta
+          name="description"
+          content="FutureGenIT is a global technology company providing software development, web & mobile app development, SaaS solutions, cloud services, AI integration, and IT consulting for startups and enterprises worldwide."
+        />
+        <title>FutureGenIT - IT Solutions & Software Development Company</title>
 
         {/* ================= CSS FILES ================= */}
         <link rel="stylesheet" href="/frontend_theme/css/bootstrap.min.css" />

@@ -41,7 +41,6 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     setStatus("loading");
     setErrorMsg("");
 
@@ -58,7 +57,7 @@ export default function ContactPage() {
             subject: formData.subject,
             message: formData.message,
           }),
-        }
+        },
       );
 
       const result = await response.json();
@@ -76,7 +75,9 @@ export default function ContactPage() {
         });
       } else {
         setStatus("error");
-        setErrorMsg(result.message || "Failed to send message. Please try again.");
+        setErrorMsg(
+          result.message || "Failed to send message. Please try again.",
+        );
       }
     } catch (err) {
       console.error(err);
@@ -562,7 +563,9 @@ export default function ContactPage() {
             <div className="page-title-content text-start">
               <h2>Contact Us</h2>
               <ul>
-                <li><a href="/">Home</a></li>
+                <li>
+                  <a href="/">Home</a>
+                </li>
                 <li>Contact Us</li>
               </ul>
             </div>
@@ -571,11 +574,12 @@ export default function ContactPage() {
 
         {/* ── Split Section ── */}
         <div className="contact-split-section">
-
           {/* Left: brand + benefits */}
           <div className="contact-left-panel">
             <span className="contact-eyebrow">Get In Touch</span>
-            <h2>We'd Love to <span>Hear From You.</span></h2>
+            <h2>
+              We'd Love to <span>Hear From You.</span>
+            </h2>
             <p className="contact-left-desc">
               At our IT solution company, we are committed to providing
               exceptional customer service and support. If you are experiencing
@@ -596,7 +600,9 @@ export default function ContactPage() {
           {/* Right: contact form */}
           <div className="contact-right-panel">
             <h3 className="form-panel-title">Send Us a Message</h3>
-            <p className="form-panel-sub">Fill in the form and we'll get back to you within 24 hours.</p>
+            <p className="form-panel-sub">
+              Fill in the form and we'll get back to you within 24 hours.
+            </p>
 
             {/* ✅ FIX: Success / error feedback */}
             {status === "success" && (
@@ -607,7 +613,10 @@ export default function ContactPage() {
             )}
             {status === "error" && (
               <div className="form-status error">
-                <i className="fas fa-exclamation-circle" style={{ marginRight: 8 }} />
+                <i
+                  className="fas fa-exclamation-circle"
+                  style={{ marginRight: 8 }}
+                />
                 {errorMsg}
               </div>
             )}
@@ -672,7 +681,6 @@ export default function ContactPage() {
                 <i className="fas fa-comment-alt input-icon" />
               </div>
 
-
               <button
                 type="submit"
                 className="btn-send"
@@ -699,7 +707,9 @@ export default function ContactPage() {
           <div className="info-strip-row">
             <div className="info-strip-cell">
               <div className="info-strip-box">
-                <div className="info-strip-icon"><i className="fas fa-map-marker-alt" /></div>
+                <div className="info-strip-icon">
+                  <i className="fas fa-map-marker-alt" />
+                </div>
                 <div className="info-strip-text">
                   <h5>Address</h5>
                   {/* ✅ FIX: Optional chaining prevents crash when settingData is undefined */}
@@ -708,28 +718,41 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {settingData?.address || "6065 Hillcroft St, Suite 511, Houston, TX 77081"}
+                    {settingData?.address ||
+                      "6065 Hillcroft St, Suite 511, Houston, TX 77081"}
                   </a>
                 </div>
               </div>
             </div>
             <div className="info-strip-cell">
               <div className="info-strip-box">
-                <div className="info-strip-icon"><i className="fas fa-phone-volume" /></div>
+                <div className="info-strip-icon">
+                  <i className="fas fa-phone-volume" />
+                </div>
                 <div className="info-strip-text">
                   <h5>Phone</h5>
-                  <a href={`tel:${settingData?.tel || "+13463283273"}`}>
-                    {settingData?.tel || "+1 (346) 328-3273"}
+                  <a
+                    href={`https://wa.me/${settingData.whatsApp || "8801915728982"}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="number d-flex align-items-center gap-1"
+                  >
+                    <i className="fab fa-whatsapp text-success" />
+                    WhatsApp: {settingData.whatsApp || "+8801915728982"}
                   </a>
                 </div>
               </div>
             </div>
             <div className="info-strip-cell">
               <div className="info-strip-box">
-                <div className="info-strip-icon"><i className="far fa-envelope" /></div>
+                <div className="info-strip-icon">
+                  <i className="far fa-envelope" />
+                </div>
                 <div className="info-strip-text">
                   <h5>Email</h5>
-                  <a href={`mailto:${settingData?.email || "info@astute360corp.com"}`}>
+                  <a
+                    href={`mailto:${settingData?.email || "info@astute360corp.com"}`}
+                  >
                     {settingData?.email || "info@astute360corp.com"}
                   </a>
                 </div>
@@ -737,7 +760,9 @@ export default function ContactPage() {
             </div>
             <div className="info-strip-cell">
               <div className="info-strip-box">
-                <div className="info-strip-icon"><i className="fas fa-hourglass-half" /></div>
+                <div className="info-strip-icon">
+                  <i className="fas fa-hourglass-half" />
+                </div>
                 <div className="info-strip-text">
                   <h5>Working Hours</h5>
                   <p>Sunday – Friday</p>
@@ -749,14 +774,9 @@ export default function ContactPage() {
         </div>
 
         {/* ── Map ── */}
-        <div id="maps" className="map-wrapper">
-          <iframe
-            src="https://maps.google.com/maps?hl=en&q=6065+Hillcroft+St,+Houston,+TX+77081,+USA&z=14&output=embed"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
-        </div>
+        {/* <div id="maps" className="map-wrapper">
+        <div className="mapouter"><div className="gmap_canvas"><iframe className="gmap_iframe" width="100%" frameBorder={0} scrolling="no" marginHeight={0} marginWidth={0} src="https://maps.google.com/maps?width=644&height=305&hl=en&q=Gulsan-78, House-2, Dhaka, Bangladesh&t=&z=14&ie=UTF8&iwloc=B&output=embed" /><a href="https://embed-googlemap.com">embed-googlemap.com</a></div><style dangerouslySetInnerHTML={{__html: ".mapouter{position:relative;text-align:right;width:100%;height:305px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:305px;}.gmap_iframe {height:305px!important;}" }} /></div>
+        </div> */}
       </div>
     </>
   );

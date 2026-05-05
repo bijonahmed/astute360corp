@@ -42,7 +42,7 @@ export default function FullWidthSlider() {
 
   return (
     <div>
-      <div className="slider-wrapper">
+      <div className="slider-wrapper" style={{ marginTop: "-25px"}}>
         <Carousel
           responsive={responsive}
           infinite

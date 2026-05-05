@@ -1,41 +1,57 @@
 import BlogClient from "./BlogClient";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://astute360corp.com";
+
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://futuregenit.com";
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const title = slug
-    ? `${slug.replace(/-/g, " ")} - Astute360corp`
-    : "Blog - Astute360corp";
+
+  const formattedTitle = slug
+    ? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "Blog";
+
+  const title = `${formattedTitle} - FutureGenIT`;
+
   const description =
-    "Learn more about Astute360corp – a quality & experience IT solution company helping customers realize the true potential of their IT organization since 2019.";
+    "Explore insights, tutorials, and industry trends from FutureGenIT covering software development, SaaS solutions, cloud computing, AI integration, and digital transformation.";
+
   return {
     title,
     description,
+
     keywords: [
-      "about us",
-      "IT solution company",
-      "Astute360corp",
-      "IT consulting",
+      "FutureGenIT blog",
+      "software development blog",
+      "SaaS tutorials",
+      "cloud computing",
+      "AI integration",
+      "IT consulting insights",
+      "web development tips",
+      "technology trends",
     ],
+
     openGraph: {
       title,
       description,
       url: `${baseUrl}/blog/${slug}`,
-      siteName: "Astute360corp",
+      siteName: "FutureGenIT",
       images: [
         {
-          url: "/og-image-services.jpg",
+          url: "/og-image-blog.jpg", // better to separate blog image
           width: 1200,
           height: 630,
           alt: title,
         },
       ],
-      type: "website",
+      type: "article",
     },
+
     alternates: {
       canonical: `${baseUrl}/blog/${slug}`,
     },
   };
 }
+
 export default function Page({ params }) {
   const { slug } = params;
   return <BlogClient slug={slug} />;

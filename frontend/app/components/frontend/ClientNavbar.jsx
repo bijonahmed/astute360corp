@@ -19,7 +19,7 @@ export default function ClientNavbar() {
   const { serversData, settingData } = useService(serviceCategoryId) || {};
 
   useEffect(() => {
-    console.log("Navbar settingData updated:", settingData);
+   // console.log("Navbar settingData updated:", settingData);
   }, [settingData]);
   const [loading, setLoading] = useState(true);
 
@@ -86,22 +86,19 @@ export default function ClientNavbar() {
             <div className="col-lg-5 col-md-4">
               <ul className="top-header-social-links">
                 <li>
-                  <a href="https://www.facebook.com/login/" target="_blank">
+                  <a
+                    href="https://www.facebook.com/futuregenit2020"
+                    target="_blank"
+                  >
                     <i className="fab fa-facebook-f" />
                   </a>
                 </li>
+
                 <li>
-                  <a href="https://www.instagram.com/" target="_blank">
-                    <i className="fab fa-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/" target="_blank">
-                    <i className="fab fa-twitter" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/" target="_blank">
+                  <a
+                    href="https://www.linkedin.com/company/futuregenit"
+                    target="_blank"
+                  >
                     <i className="fab fa-linkedin-in" />
                   </a>
                 </li>
@@ -118,11 +115,13 @@ export default function ClientNavbar() {
                 </a>
 
                 <a
-                  href="tel:+44-45789-5789"
+                  href={`https://wa.me/${settingData.whatsApp || "8801915728982"}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="number d-flex align-items-center gap-1"
                 >
-                  <i className="fas fa-phone-alt" />
-                  {settingData.tel || "+1 (346) 328-3273"}
+                  <i className="fab fa-whatsapp text-success" />
+                  WhatsApp: {settingData.whatsApp || "+8801915728982"}
                 </a>
 
                 <div className="lang-switcher d-flex align-items-center gap-1">
@@ -184,64 +183,17 @@ export default function ClientNavbar() {
                     <Link href="/services" className="dropdown-toggle nav-link">
                       Service
                     </Link>
-                    <ul className="dropdown-menu">
-                      {(() => {
-                        const grouped = serversData.reduce((acc, item) => {
-                          const key = item.subcategoryId;
-                          if (!acc[key]) acc[key] = [];
-                          acc[key].push(item);
-                          return acc;
-                        }, {});
-
-                        const subcategoryNames = {
-                          7: "SAP® Security Services",
-                          6: "SAP® GRC Services",
-                        };
-
-                        return Object.entries(grouped).map(
-                          ([subcatId, items]) => (
-                            <li className="nav-item" key={subcatId}>
-                              <a className="nav-link" href="#">
-                                {subcategoryNames[subcatId] ||
-                                  `Category ${subcatId}`}
-                                <i className="fas fa-chevron-right" />
-                              </a>
-                              <ul className="dropdown-menu">
-                                {items.map((item) => (
-                                  <li className="nav-item" key={item.id}>
-                                    <Link
-                                      href={`/services/${item.slug}`}
-                                      className="nav-link"
-                                    >
-                                      {item.name}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                          ),
-                        );
-                      })()}
-                    </ul>
+                   <ul className="dropdown-menu">
+  {serversData?.map((item) => (
+    <li className="nav-item" key={item.id}>
+      <Link href={`/services/${item.slug}`} className="nav-link">
+        {item.name}
+      </Link>
+    </li>
+  ))}
+</ul>
                   </li>
 
-                  <li className="nav-item">
-                    <Link href="/training" className="dropdown-toggle nav-link">
-                      Trainings
-                    </Link>
-                    <ul className="dropdown-menu">
-                      {trainingData?.map((item) => (
-                        <li className="nav-item" key={item.id}>
-                          <Link
-                            href={`/training/${item.slug}`}
-                            className="nav-link"
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
 
                   <li className="nav-item">
                     <Link href="/blog" className="nav-link">

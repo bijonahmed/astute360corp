@@ -3,33 +3,37 @@ import ClientNavbar from "../../../components/frontend/ClientNavbar";
 import ClientFooter from "../../../components/frontend/ClientFooter";
 
 export const metadata = {
-  title: "About Us - Astute360corp",
+  title: "About Us - FutureGenIT",
   description:
-    "Learn more about Astute360corp – a quality & experience IT solution company helping customers realize the true potential of their IT organization since 2019.",
+    "Learn more about FutureGenIT – a global IT solutions company delivering software development, SaaS products, cloud solutions, and IT consulting services since 2020.",
   keywords: [
-    "about us",
-    "IT solution company",
-    "Astute360corp",
+    "FutureGenIT",
+    "about FutureGenIT",
+    "IT solutions company",
+    "software development",
+    "SaaS development",
     "IT consulting",
+    "staff augmentation",
+    "cloud solutions",
   ],
   openGraph: {
-    title: "About Us - Astute360corp",
+    title: "About Us - FutureGenIT",
     description:
-      "Learn more about Astute360corp – a quality & experience IT solution company helping customers realize the true potential of their IT organization since 2019.",
-    url: "https://astute360corp.com/about",
-    siteName: "Astute360corp",
+      "FutureGenIT is a global technology company providing software development, SaaS solutions, IT consulting, and cloud services for startups and enterprises.",
+    url: "https://futuregenit.com/about",
+    siteName: "FutureGenIT",
     images: [
       {
         url: "/og-image-about.jpg",
         width: 1200,
         height: 630,
-        alt: "About Astute360corp",
+        alt: "About FutureGenIT",
       },
     ],
     type: "website",
   },
   alternates: {
-    canonical: "https://astute360corp.com/about",
+    canonical: "https://futuregenit.com/about",
   },
 };
 
@@ -37,7 +41,7 @@ export default function AboutPage() {
   return (
     <>
       <div>
-        {/* Start Page Title Area */}
+        {/* Page Title */}
         <div className="page-title-area transparent-bg1">
           <div className="container">
             <div className="page-title-content text-start">
@@ -51,170 +55,145 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-        {/* End Page Title Area */}
 
-        {/* Start About Area */}
-        <div className="startup-about-area ptb-100">
-          <div className="container-fluid">
-            <div className="row align-items-center">
-              <div className="col-lg-6 col-md-12">
-                <div className="startup-about-image">
-                  <div className="shape4">
-                    <img src="/frontend_theme/images/shape4.png" alt="image" />
-                  </div>
-                  <video
-                    width="100%"
-                    height={400}
-                    controls
-                    autoPlay
-                    muted
-                    playsInline
-                  >
-                    <source
-                      src="/frontend_theme/videos/astute360corp-bio.mp4"
-                      type="video/mp4"
-                    />
-                  </video>
-                  <div className="shape5">
-                    <img src="/frontend_theme/images/shape5.png" alt="image" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-12">
-                <div className="startup-about-content">
-                  <span className="sub-title">ABOUT ASTUTE360CORP</span>
-                  <h2>
-                    Welcome To Astute360corp – Quality &amp; Experience IT
-                    Solution Company
-                  </h2>
-                  <p>
-                    <strong>
-                      In 2019, Astute360corp set out with a goal – to help
-                      customers realize the true potential of their IT
-                      organization. We accomplish this through a unique and
-                      transparent business model.
-                    </strong>
-                  </p>
-                  <p>
-                    Our accomplished team, in-house technical expertise, and
-                    collective curiosity to hear YOUR story lays the foundation
-                    for a fruitful consulting engagement time and time again.
-                  </p>
-                  <ul className="features-list">
-                    <li>All In One IT Solution Company</li>
-                    <li>Amazing Expert Teams</li>
-                    <li>Quality Solution For Business</li>
-                    <li>24/7 Quick Supports</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End About Area */}
+        {/* About Section */}
+        <div
+      style={{
+        padding: "100px 20px",
+        background: "linear-gradient(135deg, #f5f7ff, #ffffff)",
+      }}
+      className="startup-about-area"
+    >
+      <div className="container-fluid">
+        <div className="row align-items-center justify-content-center">
 
-        {/* Start Funfacts Area */}
-        <div className="funfacts-area pb-70">
-          <div className="container">
-            <div className="section-title">
-              <h2>We Are Establishing a Startup Authorization Company</h2>
-              <p>
-                Since 2019, Astute360corp has been delivering exceptional IT
-                consulting services, building lasting partnerships and driving
-                real results for businesses of all sizes.
+          <div className="col-lg-12 col-md-12">
+
+            {/* Card Wrapper */}
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "20px",
+                padding: "50px",
+                boxShadow: "0 15px 10px rgba(0,0,0,0.08)",
+                border: "1px solid #eef0ff",
+              }}
+              className="startup-about-content"
+            >
+
+              <span
+                style={{
+                  display: "inline-block",
+                  padding: "6px 14px",
+                  borderRadius: "20px",
+                  background: "#e8f0ff",
+                  color: "#2563eb",
+                  fontWeight: "600",
+                  fontSize: "13px",
+                  marginBottom: "15px",
+                }}
+              >
+                ABOUT FUTUREGENIT
+              </span>
+
+              <h2
+                style={{
+                  fontSize: "32px",
+                  fontWeight: "700",
+                  lineHeight: "1.4",
+                  marginBottom: "20px",
+                  color: "#111827",
+                }}
+              >
+                Welcome To FutureGenIT – Global IT Solutions & Software Development Company
+              </h2>
+
+              <p style={{ color: "#4b5563", lineHeight: "1.8", marginBottom: "15px" }}>
+                <strong>
+                  Founded in 2020, FutureGenIT is a modern technology company
+                  dedicated to delivering scalable, secure, and innovative digital
+                  solutions that help businesses grow globally.
+                </strong>
               </p>
-            </div>
-            <div className="row justify-content-center">
-              <div className="col-lg-3 col-sm-6 col-md-6 col-6">
-                <div className="single-funfacts-box">
-                  <i className="icon flaticon-file" />
-                  <h3>
-                    <span className="odometer" data-count={2546}>
-                      50
-                    </span>
-                  </h3>
-                  <span className="sub-title">Project Complete</span>
-                  <img
-                    src="/frontend_theme/images/border.png"
-                    alt="image"
-                    className="shape"
-                  />
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-6 col-md-6 col-6">
-                <div className="single-funfacts-box">
-                  <i className="icon flaticon-rating-2" />
-                  <h3>
-                    <span className="odometer" data-count={2495}>
-                      400
-                    </span>
-                  </h3>
-                  <span className="sub-title">Happy Clients</span>
-                  <img
-                    src="/frontend_theme/images/border.png"
-                    alt="image"
-                    className="shape"
-                  />
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-6 col-md-6 col-6">
-                <div className="single-funfacts-box">
-                  <i className="icon flaticon-group" />
-                  <h3>
-                    <span className="odometer" data-count={172}>
-                      300
-                    </span>
-                  </h3>
-                  <span className="sub-title">Qualified Staffs</span>
-                  <img
-                    src="/frontend_theme/images/border.png"
-                    alt="image"
-                    className="shape"
-                  />
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-6 col-md-6 col-6">
-                <div className="single-funfacts-box">
-                  <i className="icon flaticon-trophy" />
-                  <h3>
-                    <span className="odometer" data-count={7}>
-                      20
-                    </span>
-                  </h3>
-                  <span className="sub-title">Winning Awards</span>
-                  <img
-                    src="/frontend_theme/images/border.png"
-                    alt="image"
-                    className="shape"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End Funfacts Area */}
 
-        {/* Start CTA Area */}
+              <p style={{ color: "#6b7280", lineHeight: "1.8", marginBottom: "15px" }}>
+                Our expert team specializes in software development, SaaS product
+                engineering, cloud solutions, IT consulting, and staff augmentation
+                services. We transform ideas into powerful digital products for
+                startups, SMEs, and enterprise clients.
+              </p>
+
+              <p style={{ color: "#6b7280", lineHeight: "1.8", marginBottom: "25px" }}>
+                With a strong presence in the United States and growing global
+                partnerships, FutureGenIT focuses on delivering high-quality
+                solutions that improve business efficiency, reduce operational cost,
+                and accelerate digital transformation.
+              </p>
+
+              {/* Features */}
+              <ul
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                  gap: "12px",
+                  padding: 0,
+                  listStyle: "none",
+                }}
+              >
+                {[
+                  "End-to-End Software Development Solutions",
+                  "Custom Web, Mobile & SaaS Application Development",
+                  "Cloud Infrastructure & DevOps Solutions",
+                  "AI Integration & Smart Automation Services",
+                  "Dedicated IT Staff Augmentation Teams",
+                  "24/7 Technical Support & Maintenance",
+                ].map((item, index) => (
+                  <li
+                    key={index}
+                    style={{
+                      background: "#f9fafb",
+                      padding: "12px 15px",
+                      borderRadius: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      fontSize: "14px",
+                      color: "#374151",
+                      border: "1px solid #eee",
+                    }}
+                  >
+                    <span style={{ color: "#2563eb", fontSize: "16px" }}>✔</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+        {/* CTA Section */}
         <div className="cta-area ptb-100 jarallax">
           <div className="container">
             <div className="cta-content">
-              <h2>
-                Perfect For Creators Looking to Build Your Better Business
-              </h2>
+              <h2>Build Scalable Digital Products with FutureGenIT</h2>
+
               <p>
-                Since 2019, Astute360corp has been helping organizations unlock
-                the true potential of their IT. Let us hear YOUR story and build
-                something great together.
+                Since 2020, FutureGenIT has been helping businesses transform
+                ideas into powerful digital solutions. Let’s build something
+                impactful together and scale your business globally.
               </p>
+
               <a href="/contact" className="default-btn">
                 Contact Us <i className="fas fa-chevron-right" />
               </a>
             </div>
           </div>
         </div>
-        {/* End CTA Area */}
       </div>
-     
     </>
   );
 }

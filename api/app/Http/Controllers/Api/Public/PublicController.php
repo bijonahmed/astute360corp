@@ -787,7 +787,7 @@ class PublicController extends Controller
                 'meta_keyword'    => $data->meta_keyword,
                 'createdAt'       => date("d-M-Y", strtotime($data->created_at)),
                 'thumnail_img'    => $data->thumnail_img ? url($data->thumnail_img) : null,
-                'vendor'          => 'Astute360',
+                'vendor'          => 'FutureGenIT',
             ];
         });
         return response()->json([
@@ -816,7 +816,7 @@ class PublicController extends Controller
                 'meta_keyword'    => $data->meta_keyword,
                 'createdAt'       => date("d-M-Y", strtotime($data->created_at)),
                 'thumnail_img'    => $data->thumnail_img ? url($data->thumnail_img) : null,
-                'vendor'          => 'Astute360',
+                'vendor'          => 'FutureGenIT',
                 'categoryId'      => $data->categoryId,
                 'subcategoryId'   => $data->subcategoryId,
                 'inSubcategoryId' => $data->inSubcategoryId,
@@ -1026,9 +1026,9 @@ class PublicController extends Controller
             <p>{$message}</p>
         ";
 
-        $recipients = 'mdbijon@gmail.com, info@astute360corp.com';
+        $recipients = 'mdbijon@gmail.com, info@futuregenit.com';
 
-        $sent = mail($recipients, "New Contact ASTUTE360: {$subject}", $body, $headers);
+        $sent = mail($recipients, "New Contact FuturegenIT: {$subject}", $body, $headers);
 
         if (!$sent) {
             throw new \Exception('Mail delivery failed.');

@@ -12,7 +12,7 @@ export default function BlogPage() {
 
   // ✅ Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
+  const postsPerPage = 15;
 
   // ✅ Calculate pages
   const totalPages = Math.ceil(postData.length / postsPerPage);
@@ -59,9 +59,26 @@ export default function BlogPage() {
         <div className="blog-area ptb-100">
           <div className="container">
             <div className="section-title">
-               <h2>Core Service Areas </h2>
-              <span className="sub-title1">Through alignment with your business challenges, assessment of your skill gaps, and with an agnostic technology approach, we quickly identify, qualify, and insert the right consultants and teams to help you achieve exceptional results.  </span>
-             
+              <h2 style={{ fontWeight: "700", marginBottom: "10px" }}>
+                Core Service Areas
+              </h2>
+
+              <span
+                className="sub-title1"
+                style={{
+                  display: "block",
+                  color: "#6b7280",
+                  lineHeight: "1.7",
+                  maxWidth: "750px",
+                }}
+              >
+                At FutureGenIT, we align closely with your business challenges
+                and identify critical skill gaps to deliver the right technology
+                solutions. With a flexible, technology-agnostic approach, we
+                rapidly deploy expert consultants and dedicated teams to help
+                you achieve scalable growth, improved efficiency, and
+                exceptional business results.
+              </span>
             </div>
 
             <div className="row justify-content-center">
@@ -82,7 +99,10 @@ export default function BlogPage() {
                     >
                       {/* Image */}
                       <div className="post-image">
-                        <Link href={`/services/${post.slug}`} className="d-block">
+                        <Link
+                          href={`/services/${post.slug}`}
+                          className="d-block"
+                        >
                           <img
                             src={
                               post.thumnail_img ||
@@ -109,17 +129,19 @@ export default function BlogPage() {
                         }}
                       >
                         <ul className="meta">
-                          <li>
+                          {/* <li>
                             <i className="far fa-calendar-alt" />{" "}
                             {post.createdAt}
-                          </li>
+                          </li> */}
                           <li>
                             <i className="far fa-user-circle" /> {post.vendor}
                           </li>
                         </ul>
 
                         <h3 style={{ minHeight: "50px" }}>
-                          <Link href={`/services/${post.slug}`}>{post.name}</Link>
+                          <Link href={`/services/${post.slug}`}>
+                            {post.name}
+                          </Link>
                         </h3>
 
                         <p style={{ minHeight: "60px" }}>
@@ -190,7 +212,6 @@ export default function BlogPage() {
           </div>
         </div>
       </div>
-
     </>
   );
 }

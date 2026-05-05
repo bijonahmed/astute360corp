@@ -35,7 +35,7 @@
 /* MOBILE: iPhone / small devices <640px */
 @media (max-width: 639px) {
   .slider-image {
-    height: 100px;             /* small mobile height */
+    height: 160px;             /* small mobile height */
     padding-left: 4px;         /* like bootstrap container */
     padding-right: 4px;        /* like bootstrap container */
     box-sizing: border-box;    /* include padding in width */
