@@ -72,7 +72,9 @@ export default function Home() {
     <>
       <div>
         {/* Start Banner Area */}
-        <div className="app-banner-area">
+
+         <Slider />
+        <div className="app-banner-area d-none">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-6 col-md-12">

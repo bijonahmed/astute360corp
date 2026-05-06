@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /frontend.zip
+/public/app/astute360.apk
 /.pnp
 .pnp.*
 .yarn/*

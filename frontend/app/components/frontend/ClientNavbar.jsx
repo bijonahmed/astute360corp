@@ -90,7 +90,7 @@ export default function ClientNavbar() {
                     <i className="fab fa-facebook-f" />
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="https://www.instagram.com/" target="_blank">
                     <i className="fab fa-instagram" />
                   </a>
@@ -104,7 +104,7 @@ export default function ClientNavbar() {
                   <a href="https://www.linkedin.com/" target="_blank">
                     <i className="fab fa-linkedin-in" />
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="col-lg-7 col-md-8">
