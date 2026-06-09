@@ -19,7 +19,7 @@ export default function ClientNavbar() {
   const { serversData, settingData } = useService(serviceCategoryId) || {};
 
   useEffect(() => {
-    console.log("Navbar settingData updated:", settingData);
+    //console.log("Navbar settingData updated:", settingData);
   }, [settingData]);
   const [loading, setLoading] = useState(true);
 
@@ -175,8 +175,13 @@ export default function ClientNavbar() {
                       Home
                     </Link>
                   </li>
+                   <li className="nav-item">
+                    <Link href="/notice" className="nav-link">
+                      Notice
+                    </Link>
+                  </li>
                   <li className="nav-item">
-                    <Link href="/about" className="nav-link active">
+                    <Link href="/about" className="nav-link">
                       About
                     </Link>
                   </li>

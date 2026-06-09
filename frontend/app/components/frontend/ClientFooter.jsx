@@ -68,7 +68,7 @@ export default function ClientFooter() {
                 <li>
                   <i className="fas fa-phone-volume" />{" "}
                   <a href="tel:+13463283273">
-                    {settingData.tel || "+1 (346) 328-3273"}{" "}
+                    {settingData.whatsApp || "+1 (346) 328-3273"}{" "}
                   </a>
                 </li>
               </ul>
