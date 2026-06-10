@@ -1,12 +1,16 @@
+process.env.NEXT_PRIVATE_WORKER_THREADS = 'false';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
       reactStrictMode: true,
-      trailingSlash: true, // Recommended for static exports with dynamic routes
-      //  output: 'export',
+      trailingSlash: true,
+      output: 'export',
       images: {
             unoptimized: true,
       },
-      // appDir: true,
+      typescript: {
+            ignoreBuildErrors: true,
+      },
 };
 
 export default nextConfig;

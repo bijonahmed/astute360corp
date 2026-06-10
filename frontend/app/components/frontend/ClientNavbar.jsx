@@ -175,9 +175,9 @@ export default function ClientNavbar() {
                       Home
                     </Link>
                   </li>
-                   <li className="nav-item">
-                    <Link href="/notice" className="nav-link">
-                      Notice
+                  <li className="nav-item">
+                    <Link href="/career" className="nav-link">
+                      Career
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -264,7 +264,7 @@ export default function ClientNavbar() {
           </div>
         </div>
       </div>
-      {loading && pathname === "/" && <Loading />}
+      {/* {loading && pathname === "/" && <Loading />} */}
     </div>
   );
 }
