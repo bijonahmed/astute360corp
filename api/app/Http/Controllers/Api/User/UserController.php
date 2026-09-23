@@ -39,11 +39,12 @@ class UserController extends Controller
         // $query->where('users.role_id', 1);
         $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
         $modifiedCollection = $paginator->getCollection()->map(function ($item) {
-            $status = $item->status == 1 ? 'Active' : 'None';
+            $status   = $item->status == 1 ? 'Active' : 'None';
+            $roleName = $item->role_type == "" ? 'Admin': 'Employee';
             return [
                 'id'            => $item->id,
                 'name'          => $item->name,
-                'rulename'      => 'N/A',
+                'rulename'      => $roleName,
                 'email'         => $item->email,
                 'phone_number'  => $item->phone_number,
                 'show_password' => $item->show_password,
@@ -218,7 +219,7 @@ class UserController extends Controller
         }
         // $data->delete();
         return response()->json([
-            'message' => 'User deleted successfully',
+            'message' => 'User deleted successfully not allowed.',
             'id' => $id,
         ], 200);
     }

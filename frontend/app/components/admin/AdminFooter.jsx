@@ -14,12 +14,12 @@ export default function AdminFooter() {
   <strong>
     Copyright © {new Date().getFullYear()}&nbsp;
     <a
-      href="https://futuregenit.com/"
+      href="https://usaskillsinc.com/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-decoration-none"
     >
-      FutureGenIT
+      USASKILLSINC
     </a>.
   </strong>&nbsp;
   All rights reserved.

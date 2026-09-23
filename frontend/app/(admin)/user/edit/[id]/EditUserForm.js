@@ -205,7 +205,7 @@ export default function EditUserForm({ id }) {
                       />
                     </div>
 
-                    <div className="mb-3">
+                    <div className="mb-3 d-none">
                       <label className="form-label">
                         Facebook profile link
                       </label>

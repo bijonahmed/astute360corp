@@ -1,7 +1,7 @@
 export default function RootLayout({ children }) {
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Meta tags */}
         <meta
@@ -61,7 +61,10 @@ export default function RootLayout({ children }) {
           href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
         />
       </head>
-      <body className="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+      <body
+        className="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>

@@ -1,12 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext"; // adjust path
+import { useAuth } from "../context/AuthContext";
 
-export default function dashboardLogic() {
-  const [dashbaordData, setDashboardData] = useState("");
+export default function useDashboardLogic() {
+  const [dashboardData, setDashboardData] = useState({
+    employee: 0,
+    payslip: 0,
+    user: 0,
+  });
   const [loading, setLoading] = useState(false);
-  const { token, permissions } = useAuth();
+  const { token } = useAuth();
+
   useEffect(() => {
+    if (!token) return;
+
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -16,13 +23,16 @@ export default function dashboardLogic() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Accept: "application/json",
               Authorization: `Bearer ${token}`,
             },
           }
         );
 
         const result = await res.json();
-        setDashboardData(result.data || []);
+        if (res.ok && result.data) {
+          setDashboardData(result.data);
+        }
       } catch (err) {
         console.error("Fetch failed:", err);
       } finally {
@@ -30,7 +40,7 @@ export default function dashboardLogic() {
       }
     };
     fetchData();
-  }, []);
+  }, [token]);
 
-  return { dashbaordData, loading };
+  return { dashboardData, loading };
 }

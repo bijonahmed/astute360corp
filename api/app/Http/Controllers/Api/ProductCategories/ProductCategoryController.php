@@ -18,11 +18,11 @@ class ProductCategoryController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('view product category')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view category',
-            ], 403);
-        }
+        // if (! $user->can('view product category')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view category',
+        //     ], 403);
+        // }
 
         try {
             $query = ProductCategory::where('tabs_status', 1)->where('status', 1)->orderBy('id', 'desc')->get()->map(function ($item) {
@@ -43,9 +43,6 @@ class ProductCategoryController extends Controller
 
                 return $item;
             });
-
-
-
             return response()->json([
                 'data'          => $query,
             ], 200);
@@ -65,12 +62,6 @@ class ProductCategoryController extends Controller
 
         //  dd($request->all());
 
-        $user = Auth::user();
-        if (! $user->can('view product category')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view category',
-            ], 403);
-        }
 
         try {
             $insubCateogry = ProductCategory::where('tabs_status', 2)

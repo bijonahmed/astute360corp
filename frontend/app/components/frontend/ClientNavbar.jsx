@@ -23,7 +23,9 @@ export default function ClientNavbar() {
   }, [settingData]);
   const [loading, setLoading] = useState(true);
 
-  <style>{`
+  return (
+    <div>
+      <style>{`
         .top-header-area {
           min-height: 30px;
           overflow: hidden;
@@ -66,20 +68,28 @@ export default function ClientNavbar() {
           gap: 5px;
           white-space: nowrap;
         }
-
         .top-header-contact-info a,
-.top-header-contact-info .lang-switcher {
-  margin-left: 20px; /* space between items */
-}
-
-.top-header-contact-info i {
-  margin-right: 6px; /* space between icon and text */
-}
-
-
-      `}</style>;
-  return (
-    <div>
+        .top-header-contact-info .lang-switcher {
+          margin-left: 20px;
+        }
+        .top-header-contact-info i {
+          margin-right: 6px;
+        }
+        @media (max-width: 1199.98px) {
+          .top-header-area .top-header-contact-info {
+            flex-wrap: wrap;
+            white-space: normal;
+            justify-content: flex-end;
+            gap: 8px 15px;
+            min-height: 30px;
+            padding: 4px 0;
+          }
+          .top-header-contact-info a,
+          .top-header-contact-info .lang-switcher {
+            margin-left: 0;
+          }
+        }
+      `}</style>
       <div className="top-header-area business-color d-none d-md-block">
         <div className="container-fluid">
           <div className="row align-items-center">
@@ -175,11 +185,7 @@ export default function ClientNavbar() {
                       Home
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link href="/career" className="nav-link">
-                      Career
-                    </Link>
-                  </li>
+                 
                   <li className="nav-item">
                     <Link href="/about" className="nav-link">
                       About
@@ -264,7 +270,7 @@ export default function ClientNavbar() {
           </div>
         </div>
       </div>
-      {/* {loading && pathname === "/" && <Loading />} */}
+      {/* /career {loading && pathname === "/" && <Loading />} */}
     </div>
   );
 }

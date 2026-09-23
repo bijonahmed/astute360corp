@@ -26,6 +26,7 @@ class User extends Authenticatable implements JWTSubject
         'instagram',
         'phone_number',
         'status',
+        'emp_id',
         'password',
     ];
 

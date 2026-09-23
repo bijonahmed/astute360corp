@@ -20,6 +20,12 @@ use App\Http\Controllers\Api\Public\PublicController;
 use App\Http\Controllers\Api\PurchaseOrder\PurchaseOrderController;
 use App\Http\Controllers\Api\Settings\SettingsController;
 use App\Http\Controllers\Api\Supplier\SupplierController;
+use App\Http\Controllers\Api\hrm\department\DepartmentController;
+use App\Http\Controllers\Api\hrm\designation\DesignationController;
+use App\Http\Controllers\Api\hrm\emplpayslip\EmplPayslipController;
+use App\Http\Controllers\Api\hrm\employee\EmployeeController;
+use App\Http\Controllers\Api\hrm\payslip\PayslipController;
+use App\Http\Controllers\Api\hrm\project\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
@@ -65,6 +71,10 @@ Route::prefix('confirOrders')->group(function () {
     Route::post('/confirm-order', [ConfirmOrdersController::class, 'confirmOrder']);
     Route::get('/getOrderCustomer', [ConfirmOrdersController::class, 'getOrderCustomer']);
 });
+    Route::prefix('payslip')->group(function () {
+    Route::get('/stream/{id}', [PayslipController::class, 'stream']);
+});
+
 Route::middleware(['auth:api'])->group(function () {
     // User
     Route::get('/profile', [AuthController::class, 'profile']);
@@ -114,6 +124,47 @@ Route::middleware(['auth:api'])->group(function () {
         Route::DELETE('/delete/{id}', [SupplierController::class, 'destroy']);
         Route::get('/chkrow/{id}', [SupplierController::class, 'checkrow']);
         Route::post('/updateData', [SupplierController::class, 'update']);
+    });
+    Route::prefix('department')->group(function () {
+        Route::get('/index', [DepartmentController::class, 'index']);
+        Route::post('/create', [DepartmentController::class, 'store']);
+        Route::DELETE('/delete/{id}', [DepartmentController::class, 'destroy']);
+        Route::get('/chkrow/{id}', [DepartmentController::class, 'checkrow']);
+        Route::post('/updateData', [DepartmentController::class, 'update']);
+    });
+    Route::prefix('designation')->group(function () {
+        Route::get('/index', [DesignationController::class, 'index']);
+        Route::post('/create', [DesignationController::class, 'store']);
+        Route::DELETE('/delete/{id}', [DesignationController::class, 'destroy']);
+        Route::get('/chkrow/{id}', [DesignationController::class, 'checkrow']);
+        Route::post('/updateData', [DesignationController::class, 'update']);
+    });
+    Route::prefix('project')->group(function () {
+        Route::get('/index', [ProjectController::class, 'index']);
+        Route::post('/create', [ProjectController::class, 'store']);
+        Route::DELETE('/delete/{id}', [ProjectController::class, 'destroy']);
+        Route::get('/chkrow/{id}', [ProjectController::class, 'checkrow']);
+        Route::post('/updateData', [ProjectController::class, 'update']);
+    });
+    Route::prefix('employee')->group(function () {
+        Route::get('/index', [EmployeeController::class, 'index']);
+        Route::post('/create', [EmployeeController::class, 'store']);
+        Route::DELETE('/delete/{id}', [EmployeeController::class, 'destroy']);
+        Route::get('/chkrow/{id}', [EmployeeController::class, 'checkrow']);
+        Route::post('/updateData', [EmployeeController::class, 'update']);
+    });
+    Route::prefix('payslip')->group(function () {
+        Route::get('/index', [PayslipController::class, 'index']);
+        Route::post('/create', [PayslipController::class, 'store']);
+        Route::DELETE('/delete/{id}', [PayslipController::class, 'destroy']);
+        Route::get('/chkrow/{id}', [PayslipController::class, 'checkrow']);
+        Route::post('/updateData', [PayslipController::class, 'update']);
+        Route::get('/employee/{employeeId}', [PayslipController::class, 'employeePayslips']);
+    });
+    Route::prefix('emplpayslip')->group(function () {
+        Route::get('/index', [EmplPayslipController::class, 'index']);
+        Route::get('/chkrow/{id}', [EmplPayslipController::class, 'checkrow']);
+        Route::get('/stream/{id}', [EmplPayslipController::class, 'stream']);
     });
     Route::prefix('purchase')->group(function () {
         Route::get('/index', [PurchaseOrderController::class, 'index']);

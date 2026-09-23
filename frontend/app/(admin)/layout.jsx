@@ -20,13 +20,40 @@ export default function AdminLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");  
+    const token = localStorage.getItem("token");
     if (!token) {
-      router.replace("/login");  
+      router.replace("/login");
     } else {
-      setLoading(false);  
+      setLoading(false);
     }
   }, [router]);
+
+  useEffect(() => {
+    if (loading) return;
+    const verify = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/profile`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res.status === 401) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("username");
+          localStorage.removeItem("roles");
+          localStorage.removeItem("permissions");
+          router.replace("/login");
+        }
+      } catch {
+        // network error — keep session, page-level fetches will handle it
+      }
+    };
+    verify();
+  }, [loading, router]);
 
   if (loading) return <p>Loading...</p>;  
 

@@ -23,6 +23,13 @@ export default function UserPage() {
       document.title = title;
     }
   }, [title]);
+
+  useEffect(() => {
+    if (!perms.includes("view users")) {
+      router.replace("/dashboard");
+    }
+  }, [perms, router]);
+
   const [statusFilter, setStatusFilter] = useState("");
   const [data, setData] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
@@ -30,6 +37,65 @@ export default function UserPage() {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [search, setSearch] = useState("");
+  const [pwdModal, setPwdModal] = useState(null);
+  const [pwdForm, setPwdForm] = useState({ password: "", password_confirmation: "" });
+  const [pwdErrors, setPwdErrors] = useState({});
+  const [pwdSaving, setPwdSaving] = useState(false);
+
+  const openPwdModal = (row) => {
+    setPwdModal(row);
+    setPwdForm({ password: "", password_confirmation: "" });
+    setPwdErrors({});
+  };
+
+  const closePwdModal = () => {
+    setPwdModal(null);
+    setPwdForm({ password: "", password_confirmation: "" });
+    setPwdErrors({});
+  };
+
+  const handlePwdChange = (e) => {
+    const { name, value } = e.target;
+    setPwdForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePwdSubmit = async (e) => {
+    e.preventDefault();
+    if (!pwdModal) return;
+    setPwdErrors({});
+    setPwdSaving(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/changePassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id: pwdModal.id,
+          password: pwdForm.password,
+          password_confirmation: pwdForm.password_confirmation,
+        }),
+      });
+      const result = await res.json();
+      if (res.ok && result.status !== false) {
+        toast.success(result.message || "Password updated successfully");
+        closePwdModal();
+      } else if (result.errors) {
+        setPwdErrors(result.errors);
+        toast.error(Object.values(result.errors).flat().join("\n"), {
+          style: { whiteSpace: "pre-line" },
+        });
+      } else {
+        toast.error(result.message || "Something went wrong!");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Network or server error!");
+    } finally {
+      setPwdSaving(false);
+    }
+  };
 
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete?")) return;
@@ -43,7 +109,7 @@ export default function UserPage() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       const data = await res.json();
@@ -65,7 +131,7 @@ export default function UserPage() {
     page = 1,
     pageSize = 10,
     searchQuery = "",
-    selectedFilter = statusFilter !== "" ? statusFilter : 1
+    selectedFilter = statusFilter !== "" ? statusFilter : 1,
   ) => {
     setLoading(true);
 
@@ -121,9 +187,17 @@ export default function UserPage() {
           {perms.includes("edit users") ? (
             <button
               className="btn btn-sm btn-primary"
-              onClick={() => router.push(`/user/edit/${row.id}`)}
+              onClick={() => router.push(`/user/edit?id=${row.id}`)}
             >
               <i className="bi bi-pencil"></i> Edit
+            </button>
+          ) : null}
+          {perms.includes("edit users") ? (
+            <button
+              className="btn btn-sm btn-warning"
+              onClick={() => openPwdModal(row)}
+            >
+              <i className="bi bi-key"></i> Password
             </button>
           ) : null}
           {perms.includes("delete users") ? (
@@ -152,10 +226,9 @@ export default function UserPage() {
   const handlePageChange = (newPage) => setPage(newPage);
   const handlePerRowsChange = (newPerPage) => setPerPage(newPerPage);
 
-  if (!perms.includes("view users")) {
-    router.replace("/dashboard");
-    return false;
-  }
+  // if (!perms.includes("view users")) {
+  //   return null;
+  // }
 
   return (
     <main className="app-main" id="main" tabIndex={-1}>
@@ -266,6 +339,110 @@ export default function UserPage() {
       </div>
       {/*end::Container*/}
       {/*end::App Content*/}
+
+      {pwdModal && (
+        <div
+          className="modal fade show d-block"
+          tabIndex="-1"
+          aria-hidden="true"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.55)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 shadow-lg">
+              <div
+                className="modal-header text-white"
+                style={{
+                  background: "linear-gradient(135deg, #0d6efd, #6610f2)",
+                }}
+              >
+                <h5 className="modal-title mb-0">
+                  <i className="bi bi-key me-2"></i>
+                  Change Password
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close btn-close-white"
+                  onClick={closePwdModal}
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form onSubmit={handlePwdSubmit}>
+                <div className="modal-body">
+                  <div className="mb-3">
+                    <label className="form-label">User</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={`${pwdModal.name || ""} (${pwdModal.email || ""})`}
+                      disabled
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">
+                      New Password <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      className={`form-control ${pwdErrors.password ? "is-invalid" : ""}`}
+                      name="password"
+                      value={pwdForm.password}
+                      onChange={handlePwdChange}
+                      autoComplete="new-password"
+                    />
+                    {pwdErrors.password?.length > 0 && (
+                      <div className="invalid-feedback">{pwdErrors.password[0]}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">
+                      Confirm Password <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      className={`form-control ${pwdErrors.password_confirmation ? "is-invalid" : ""}`}
+                      name="password_confirmation"
+                      value={pwdForm.password_confirmation}
+                      onChange={handlePwdChange}
+                      autoComplete="new-password"
+                    />
+                    {pwdErrors.password_confirmation?.length > 0 && (
+                      <div className="invalid-feedback">
+                        {pwdErrors.password_confirmation[0]}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={closePwdModal}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={pwdSaving}
+                  >
+                    {pwdSaving ? (
+                      <>
+                        <span
+                          className="spinner-border spinner-border-sm me-1"
+                          role="status"
+                        ></span>
+                        Saving...
+                      </>
+                    ) : (
+                      "Update Password"
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

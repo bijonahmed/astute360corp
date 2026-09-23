@@ -26,7 +26,7 @@ export default function AdminSidebar() {
 
     return () => {
       menuLinks.forEach((link) =>
-        link.removeEventListener("click", handleClick)
+        link.removeEventListener("click", handleClick),
       );
     };
   }, []);
@@ -35,135 +35,62 @@ export default function AdminSidebar() {
   const sidebarLinks = [
     { label: "My Dashboard", href: "/dashboard", icon: "bi-speedometer" },
     { label: "Profile", href: "/profile", icon: "bi-palette" },
-    {
-      label: "Users",
-      href: "#",
-      icon: "bi-box-seam-fill",
-      children: [{ label: "User List", href: "/user", icon: "bi-circle" }],
-    },
-    {
-      label: "Post Management",
-      href: "#",
-      icon: "nav-icon bi bi-ui-checks-grid",
-      children: [
-        { label: "Post Category", href: "/postcategories", icon: "bi-circle" },
-        { label: "Post", href: "/post", icon: "bi-circle" },
-      ],
-    },
+
+    // {
+    //   label: "Post Management",
+    //   href: "#",
+    //   icon: "nav-icon bi bi-ui-checks-grid",
+    //   children: [
+    //     { label: "Post Category", href: "/postcategories", icon: "bi-circle" },
+    //     { label: "Post", href: "/post", icon: "bi-circle" },
+    //   ],
+    // },
 
     // ✅ SHOW ONLY IF ADMIN
     ...(roles.includes("admin")
       ? [
           {
-            label: "Categories",
-            href: "#",
-            icon: "bi-box-seam-fill",
-            children: [
-              {
-                label: "Category",
-                href: "/product-categories-manage",
-                icon: "bi-circle",
-              },
-            ],
-          },
-          {
-            label: "Banner Management",
+            label: "HRM Management",
             href: "#",
             icon: "nav-icon bi bi-ui-checks-grid",
             children: [
+              //{ label: "Roles Manage", href: "/roles", icon: "bi-circle" },
               {
-                label: "Banner",
-                href: "/banner",
+                label: "Department",
+                href: "/hrm/department",
                 icon: "bi-circle",
               },
-            ],
-          },
-          /*
-          {
-            label: "Supplier Management",
-            href: "#",
-            icon: "nav-icon bi bi-ui-checks",
-            children: [
               {
-                label: "Supplier List",
-                href: "/supplier",
+                label: "Designation",
+                href: "/hrm/designation",
                 icon: "bi-circle",
               },
+              
+              { label: "Project", href: "/hrm/projects", icon: "bi-circle" },
+              { label: "Employee", href: "/hrm/employee", icon: "bi-circle" },
+              { label: "PaySlip", href: "/hrm/payslip", icon: "bi-circle" },
             ],
           },
-          {
-            label: "Purchase Management",
-            href: "#",
-            icon: "bi-box-seam-fill",
-            children: [
-              {
-                label: "Purchase List",
-                href: "/purchase",
-                icon: "bi-circle",
-              },
-            ],
-          },
-*/
-           {
-            label: "Product Management",
-            href: "#",
-            icon: "nav-icon bi bi-ui-checks",
-            children: [
-              {
-                label: "Product List",
-                href: "/product",
-                icon: "bi-circle",
-              },
-            ],
-          },
-          /*
-          {
-            label: "Order Management",
-            href: "#",
-            icon: "bi-box-seam-fill",
-            children: [
-              {
-                label: "Order List",
-                href: "/order",
-                icon: "bi-circle",
-              },
-            ],
-          },
-
-          {
-            label: "Inventory Management",
-            href: "#",
-            icon: "bi-box-seam-fill",
-            children: [
-              {
-                label: "My Inventory",
-                href: "/inventory",
-                icon: "bi-circle",
-              },
-            ],
-          },
-
-          {
-            label: "Customer Management",
-            href: "#",
-            icon: "nav-icon bi bi-ui-checks",
-            children: [
-              {
-                label: "Customer List",
-                href: "/customer",
-                icon: "bi-circle",
-              },
-            ],
-          },
-*/
+         
           {
             label: "System Management",
             href: "#",
             icon: "nav-icon bi bi-ui-checks-grid",
             children: [
               //{ label: "Roles Manage", href: "/roles", icon: "bi-circle" },
-              { label: "Permission Manage", href: "/permission", icon: "bi-circle"},
+              //{ label: "Permission Manage", href: "/permission", icon: "bi-circle"},
+              { label: "Category", href: "/product-categories-manage", icon: "bi-circle"},
+              { label: "Banner",href: "/banner",icon: "bi-circle"},
               { label: "Website Setting", href: "/setting", icon: "bi-circle" },
+
+            ],
+          },
+          {
+            label: "Users",
+            href: "#",
+            icon: "bi-box-seam-fill",
+            children: [
+              { label: "User List", href: "/user", icon: "bi-circle" },
             ],
           },
         ]
@@ -193,7 +120,7 @@ export default function AdminSidebar() {
               alt="FG Logo"
               className="brand-image opacity-75 shadow"
             />
-            <span className="brand-text fw-light">FG</span>
+            <span className="brand-text fw-light">astute360corp</span>
           </Link>
         </div>
 

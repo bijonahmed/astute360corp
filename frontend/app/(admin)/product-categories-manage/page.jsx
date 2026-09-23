@@ -11,7 +11,7 @@ import { createServerSearchParamsForServerPage } from "next/dist/server/request/
 
 export default function UserPage() {
   const router = useRouter();
-  const { token, permissions } = useAuth();
+  const { token, permissions, logout } = useAuth();
   const perms = Array.isArray(permissions)
     ? permissions
     : permissions?.split(",") || [];
@@ -64,6 +64,7 @@ export default function UserPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ category_id: categoryId }),
@@ -71,6 +72,10 @@ export default function UserPage() {
       );
 
       const data = await res.json();
+      if (res.status === 401) {
+        logout();
+        return;
+      }
       if (data?.data) setSubCategories(data.data);
     } catch (err) {
       console.error("Subcategory fetch error:", err);
@@ -78,6 +83,10 @@ export default function UserPage() {
   };
 
   const fetchProCategory = async () => {
+    if (!token) {
+      logout();
+      return;
+    }
     setLoading(true);
     try {
       const url = `${process.env.NEXT_PUBLIC_API_BASE}/product-category/index`;
@@ -85,10 +94,15 @@ export default function UserPage() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
       const result = await res.json();
+      if (res.status === 401) {
+        logout();
+        return;
+      }
       if (!res.ok) throw new Error(result?.message || `HTTP ${res.status}`);
       setData(result.data || []);
       setInsubCateogry(result.insubCateogry || []);
@@ -114,11 +128,16 @@ export default function UserPage() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
 
       const result = await res.json();
+      if (res.status === 401) {
+        logout();
+        return;
+      }
       if (!res.ok) throw new Error(result?.message || `HTTP ${res.status}`);
 
       setInsubCateogry(result.insubCateogry || []);
@@ -131,7 +150,7 @@ export default function UserPage() {
   };
   useEffect(() => {
     fetchProCategory();
-  }, []);
+  }, [token]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -198,6 +217,7 @@ export default function UserPage() {
         {
           method: "POST",
           headers: {
+            Accept: "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: formData,
