@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\hrm\emplpayslip\EmplPayslipController;
 use App\Http\Controllers\Api\hrm\employee\EmployeeController;
 use App\Http\Controllers\Api\hrm\payslip\PayslipController;
 use App\Http\Controllers\Api\hrm\project\ProjectController;
+use App\Http\Controllers\Api\hrm\worksubmit\WorkSubmitController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
@@ -165,6 +166,27 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('/index', [EmplPayslipController::class, 'index']);
         Route::get('/chkrow/{id}', [EmplPayslipController::class, 'checkrow']);
         Route::get('/stream/{id}', [EmplPayslipController::class, 'stream']);
+    });
+    Route::prefix('worksubmit')->group(function () {
+        Route::get('/projects', [WorkSubmitController::class, 'projects']);
+        Route::get('/index', [WorkSubmitController::class, 'index']);
+        Route::get('/byDate', [WorkSubmitController::class, 'byDate']);
+        Route::get('/monthlyTotals', [WorkSubmitController::class, 'monthlyTotals']);
+        Route::get('/months', [WorkSubmitController::class, 'months']);
+        Route::post('/bulkUpdate', [WorkSubmitController::class, 'bulkUpdate']);
+        Route::get('/chkrow/{id}', [WorkSubmitController::class, 'checkrow']);
+        Route::post('/create', [WorkSubmitController::class, 'store']);
+        Route::post('/updateData', [WorkSubmitController::class, 'update']);
+        Route::DELETE('/delete/{id}', [WorkSubmitController::class, 'destroy']);
+
+        Route::get('/admin/projects', [WorkSubmitController::class, 'adminProjects']);
+        Route::get('/admin/employees', [WorkSubmitController::class, 'adminEmployees']);
+        Route::get('/admin/index', [WorkSubmitController::class, 'adminIndex']);
+        Route::get('/admin/chkrow/{id}', [WorkSubmitController::class, 'adminCheckrow']);
+        Route::post('/admin/create', [WorkSubmitController::class, 'adminStore']);
+        Route::post('/admin/bulkUpdate', [WorkSubmitController::class, 'adminBulkUpdate']);
+        Route::post('/admin/updateData', [WorkSubmitController::class, 'adminUpdate']);
+        Route::DELETE('/admin/delete/{id}', [WorkSubmitController::class, 'adminDestroy']);
     });
     Route::prefix('purchase')->group(function () {
         Route::get('/index', [PurchaseOrderController::class, 'index']);

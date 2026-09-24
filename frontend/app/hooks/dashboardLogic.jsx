@@ -7,6 +7,10 @@ export default function useDashboardLogic() {
     employee: 0,
     payslip: 0,
     user: 0,
+    workSubmit: 0,
+    workSubmitPending: 0,
+    workSubmitApproved: 0,
+    workSubmitCancelled: 0,
   });
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
@@ -31,7 +35,7 @@ export default function useDashboardLogic() {
 
         const result = await res.json();
         if (res.ok && result.data) {
-          setDashboardData(result.data);
+          setDashboardData((prev) => ({ ...prev, ...result.data }));
         }
       } catch (err) {
         console.error("Fetch failed:", err);

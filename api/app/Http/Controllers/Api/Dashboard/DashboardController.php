@@ -13,6 +13,7 @@ use App\Models\ProductCategory;
 use App\Models\PurchaseOrderInvoice;
 use App\Models\Supplier;
 use App\Models\User;
+use App\Models\WorkSubmit;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,10 @@ class DashboardController extends Controller
                 'employee'  => Employee::count(),
                 'payslip'   => Payslip::count(),
                 'user'      => User::count(),
+                'workSubmit' => WorkSubmit::count(),
+                'workSubmitPending' => WorkSubmit::where('status', 0)->count(),
+                'workSubmitApproved' => WorkSubmit::where('status', 1)->count(),
+                'workSubmitCancelled' => WorkSubmit::where('status', 2)->count(),
                 'product_catgory' => ProductCategory::where('status', 1)->count(),
                 'baner'           => Banner::count(),
                 'customer'        => User::where('role_type', 4)->where('status', 1)->count(),

@@ -83,4 +83,9 @@ class Employee extends Model
     {
         return $this->hasMany(Payslip::class, 'employee_id');
     }
+
+    public function workSubmits()
+    {
+        return $this->hasMany(WorkSubmit::class, 'employee_id');
+    }
 }

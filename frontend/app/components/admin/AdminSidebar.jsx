@@ -69,6 +69,7 @@ export default function AdminSidebar() {
               { label: "Project", href: "/hrm/projects", icon: "bi-circle" },
               { label: "Employee", href: "/hrm/employee", icon: "bi-circle" },
               { label: "PaySlip", href: "/hrm/payslip", icon: "bi-circle" },
+              { label: "Work Submit", href: "/hrm/timesheet", icon: "bi-circle" },
             ],
           },
          

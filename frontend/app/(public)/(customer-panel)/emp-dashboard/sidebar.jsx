@@ -12,6 +12,7 @@ export default function Sidebar() {
   const { username } = useAuth();
 
   const [mounted, setMounted] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -45,8 +46,13 @@ export default function Sidebar() {
           .toUpperCase()
       : "";
 
-  const handleLogout = (e) => {
+  const openLogout = (e) => {
     e.preventDefault();
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
     try {
       ["token", "username", "roles", "permissions", "user"].forEach((k) =>
         localStorage.removeItem(k)
@@ -58,6 +64,8 @@ export default function Sidebar() {
       }, 300);
     }
   };
+
+  const cancelLogout = () => setShowLogoutModal(false);
 
   return (
     <aside className="emp-side">
@@ -134,6 +142,71 @@ export default function Sidebar() {
         .emp-side-link.emp-side-logout svg { color:#f87171; }
         .emp-side-link.emp-side-logout:hover { background:#fef2f2; color:#b91c1c; }
         .emp-side-link.emp-side-logout:hover svg { color:#dc2626; }
+
+        .emp-logout-back {
+          position:fixed; inset:0; z-index:1080;
+          background:rgba(15,23,42,0.55);
+          display:flex; align-items:center; justify-content:center;
+          padding:16px;
+          animation:empLogoutFade .2s ease;
+          backdrop-filter:blur(3px);
+        }
+        .emp-logout-modal {
+          background:#fff; border-radius:16px; overflow:hidden;
+          width:100%; max-width:400px;
+          box-shadow:0 24px 64px rgba(0,0,0,0.3);
+          animation:empLogoutPop .28s cubic-bezier(.34,1.56,.64,1);
+        }
+        .emp-logout-head {
+          background:#0f172a; color:#fff;
+          padding:18px 20px; display:flex; align-items:center; gap:12px;
+        }
+        .emp-logout-ico {
+          width:42px; height:42px; flex-shrink:0;
+          background:rgba(248,113,113,0.15); border:1px solid rgba(248,113,113,0.35);
+          border-radius:50%; display:flex; align-items:center; justify-content:center;
+          color:#f87171;
+        }
+        .emp-logout-head h3 {
+          font-size:15px; font-weight:800; color:#ffffff; letter-spacing:-0.2px;
+        }
+        .emp-logout-body {
+          padding:22px 20px; text-align:center;
+        }
+        .emp-logout-body p {
+          font-size:14px; color:#4b5563; font-weight:600; line-height:1.6;
+        }
+        .emp-logout-body p b { color:#0f172a; }
+        .emp-logout-foot {
+          padding:0 20px 20px; display:flex; gap:10px;
+        }
+        .emp-logout-btn {
+          flex:1; height:44px; border-radius:10px;
+          font-size:13.5px; font-weight:700; cursor:pointer;
+          font-family:'Plus Jakarta Sans', sans-serif;
+          border:1.5px solid transparent;
+          display:inline-flex; align-items:center; justify-content:center; gap:7px;
+          transition:transform .12s, box-shadow .15s, background .15s;
+        }
+        .emp-logout-btn:hover { transform:translateY(-1px); }
+        .emp-logout-btn:active { transform:translateY(0); }
+        .emp-logout-btn-no {
+          background:#fff; border-color:#e5e7eb; color:#4b5563;
+        }
+        .emp-logout-btn-no:hover { background:#f9fafb; border-color:#d1d5db; }
+        .emp-logout-btn-yes {
+          background:#dc2626; color:#fff; border-color:#dc2626;
+          box-shadow:0 3px 10px rgba(220,38,38,0.3);
+        }
+        .emp-logout-btn-yes:hover { background:#b91c1c; border-color:#b91c1c; }
+        @keyframes empLogoutFade {
+          from { opacity:0; }
+          to { opacity:1; }
+        }
+        @keyframes empLogoutPop {
+          0% { opacity:0; transform:scale(.88) translateY(14px); }
+          100% { opacity:1; transform:scale(1) translateY(0); }
+        }
 
         @media (max-width: 991px) {
           .emp-side-head {
@@ -216,18 +289,18 @@ export default function Sidebar() {
         </Link>
 
         <Link
-          href="/whishlist"
-          className={`emp-side-link ${isActive("/whishlist") ? "active" : ""}`}
+          href="/timesheet"
+          className={`emp-side-link ${isActive("/timesheet") ? "active" : ""}`}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
-          Work Submit
+          TimeSheet
         </Link>
 
         <div className="emp-side-divider" />
 
-        <button type="button" className="emp-side-link emp-side-logout" onClick={handleLogout}>
+        <button type="button" className="emp-side-link emp-side-logout" onClick={openLogout}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
             <polyline points="16 17 21 12 16 7" />
@@ -236,6 +309,56 @@ export default function Sidebar() {
           Logout
         </button>
       </nav>
+
+      {showLogoutModal && (
+        <div className="emp-logout-back" onClick={cancelLogout}>
+          <div
+            className="emp-logout-modal"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="emp-logout-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="emp-logout-head">
+              <div className="emp-logout-ico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </div>
+              <h3 id="emp-logout-title">Confirm Logout</h3>
+            </div>
+            <div className="emp-logout-body">
+              <p>
+                Are you sure you want to <b>logout</b> from your employee
+                account?
+              </p>
+            </div>
+            <div className="emp-logout-foot">
+              <button
+                type="button"
+                className="emp-logout-btn emp-logout-btn-no"
+                onClick={cancelLogout}
+              >
+                No, Stay
+              </button>
+              <button
+                type="button"
+                className="emp-logout-btn emp-logout-btn-yes"
+                onClick={confirmLogout}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Yes, Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </aside>
   );
 }
