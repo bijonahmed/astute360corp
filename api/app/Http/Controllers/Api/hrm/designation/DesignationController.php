@@ -13,11 +13,11 @@ class DesignationController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('view designation')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view designation',
-            ], 403);
-        }
+        // if (! $user->can('view designation')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view designation',
+        //     ], 403);
+        // }
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
         $searchQuery    = $request->searchQuery;
@@ -50,11 +50,11 @@ class DesignationController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('create designation')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to create designation',
-            ], 403);
-        }
+        // if (! $user->can('create designation')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to create designation',
+        //     ], 403);
+        // }
         $validator = Validator::make($request->all(), [
             'name'   => 'required',
             'status' => 'required',
@@ -83,11 +83,11 @@ class DesignationController extends Controller
     {
         $user = Auth::user();
 
-        if (! $user->can('delete designation')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to delete',
-            ], 403);
-        }
+        // if (! $user->can('delete designation')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to delete',
+        //     ], 403);
+        // }
 
         $designation = Designation::find($id);
         if (! $designation) {
@@ -106,11 +106,11 @@ class DesignationController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('edit designation')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to edit designation',
-            ], 403);
-        }
+        // if (! $user->can('edit designation')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to edit designation',
+        //     ], 403);
+        // }
 
         $validator = Validator::make($request->all(), [
             'name'   => 'required',

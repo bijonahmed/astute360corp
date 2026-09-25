@@ -65,11 +65,11 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('view employee')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view employee',
-            ], 403);
-        }
+        // if (! $user->can('view employee')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view employee',
+        //     ], 403);
+        // }
 
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
@@ -148,11 +148,11 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('create employee')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to create employee',
-            ], 403);
-        }
+        // if (! $user->can('create employee')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to create employee',
+        //     ], 403);
+        // }
 
         $validator = Validator::make($request->all(), [
             'name'     => 'required',
@@ -240,12 +240,12 @@ class EmployeeController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
-        if (! $user->can('edit employee')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to edit employee',
-            ], 403);
-        }
+        // $user = Auth::user();
+        // if (! $user->can('edit employee')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to edit employee',
+        //     ], 403);
+        // }
 
         $employee = Employee::find($request->id);
         if (! $employee) {

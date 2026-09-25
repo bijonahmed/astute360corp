@@ -13,11 +13,11 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('view project')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view project',
-            ], 403);
-        }
+        // if (! $user->can('view project')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view project',
+        //     ], 403);
+        // }
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
         $searchQuery    = $request->searchQuery;
@@ -50,11 +50,11 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('create project')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to create project',
-            ], 403);
-        }
+        // if (! $user->can('create project')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to create project',
+        //     ], 403);
+        // }
         $validator = Validator::make($request->all(), [
             'name'   => 'required',
             'status' => 'required',
@@ -83,11 +83,11 @@ class ProjectController extends Controller
     {
         $user = Auth::user();
 
-        if (! $user->can('delete project')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to delete',
-            ], 403);
-        }
+        // if (! $user->can('delete project')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to delete',
+        //     ], 403);
+        // }
 
         $project = Project::find($id);
         if (! $project) {
@@ -106,11 +106,11 @@ class ProjectController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('edit project')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to edit project',
-            ], 403);
-        }
+        // if (! $user->can('edit project')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to edit project',
+        //     ], 403);
+        // }
 
         $validator = Validator::make($request->all(), [
             'name'   => 'required',

@@ -15,11 +15,11 @@ class PayslipController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('view payslip')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view payslip',
-            ], 403);
-        }
+        // if (! $user->can('view payslip')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view payslip',
+        //     ], 403);
+        // }
 
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
@@ -89,11 +89,11 @@ class PayslipController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('create payslip')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to create payslip',
-            ], 403);
-        }
+        // if (! $user->can('create payslip')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to create payslip',
+        //     ], 403);
+        // }
 
         $validator = Validator::make($request->all(), [
             'selected_date' => 'required|date',
@@ -142,11 +142,11 @@ class PayslipController extends Controller
     public function destroy($id)
     {
         $user = Auth::user();
-        if (! $user->can('delete payslip')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to delete payslip',
-            ], 403);
-        }
+        // if (! $user->can('delete payslip')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to delete payslip',
+        //     ], 403);
+        // }
 
         $payslip = Payslip::find($id);
         if (! $payslip) {
@@ -170,11 +170,11 @@ class PayslipController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('edit payslip')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to edit payslip',
-            ], 403);
-        }
+        // if (! $user->can('edit payslip')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to edit payslip',
+        //     ], 403);
+        // }
 
         $validator = Validator::make($request->all(), [
             'id'            => 'required|integer|exists:payslip,id',
@@ -225,11 +225,11 @@ class PayslipController extends Controller
     public function employeePayslips(Request $request, $employeeId)
     {
         $user = Auth::user();
-        if (! $user->can('view payslip')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view payslip',
-            ], 403);
-        }
+        // if (! $user->can('view payslip')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view payslip',
+        //     ], 403);
+        // }
 
         $employee = Employee::with(['department:id,name', 'designation:id,name'])
             ->find($employeeId);

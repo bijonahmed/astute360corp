@@ -13,11 +13,11 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('view department')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to view department',
-            ], 403);
-        }
+        // if (! $user->can('view department')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to view department',
+        //     ], 403);
+        // }
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
         $searchQuery    = $request->searchQuery;
@@ -50,11 +50,11 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('create department')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to create department',
-            ], 403);
-        }
+        // if (! $user->can('create department')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to create department',
+        //     ], 403);
+        // }
         $validator = Validator::make($request->all(), [
             'name'   => 'required',
             'status' => 'required',
@@ -83,11 +83,11 @@ class DepartmentController extends Controller
     {
         $user = Auth::user();
 
-        if (! $user->can('delete department')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to delete',
-            ], 403);
-        }
+        // if (! $user->can('delete department')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to delete',
+        //     ], 403);
+        // }
 
         $department = Department::find($id);
         if (! $department) {
@@ -106,11 +106,11 @@ class DepartmentController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        if (! $user->can('edit department')) {
-            return response()->json([
-                'message' => 'Unauthorized: You do not have permission to edit department',
-            ], 403);
-        }
+        // if (! $user->can('edit department')) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized: You do not have permission to edit department',
+        //     ], 403);
+        // }
 
         $validator = Validator::make($request->all(), [
             'name'   => 'required',
